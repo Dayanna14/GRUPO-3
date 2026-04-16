@@ -59,7 +59,6 @@ public class PerfilProfesionalController {
 
 
         PerfilProfesional pPer = existente.get();
-        pPer.setIdPerfilProfesional(dto.getIdPerfilProfesional());
         pPer.setEspecialidad(dto.getEspecialidad());
         pPer.setBiografia(dto.getBiografia());
         pSer.update(pPer);
