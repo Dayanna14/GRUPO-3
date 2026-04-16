@@ -2,8 +2,7 @@ package com.avance.avancetb.entities;
 
 import jakarta.persistence.*;
 
-import java.time.LocalTime;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Usuario") // opcional pero recomendado
@@ -31,7 +30,7 @@ public class Usuario {
     private boolean lectura_automatica;
 
     @Column(name = "Fecha_nacimiento",nullable = false)
-    private LocalTime Fecha_nacimiento;
+    private LocalDate Fecha_nacimiento;
 
     @Column(name = "username",length = 150,nullable = false)
     private String username;
@@ -46,12 +45,16 @@ public class Usuario {
     private String estado_cuenta;
 
     @Column(name = "fecha_primer_acceso",nullable = false)
-    private LocalTime fecha_primer_acceso;
+    private LocalDate fecha_primer_acceso;
 
     @Column(name = "tutorial_completado",nullable = false)
     private boolean tutorial_completado;
 
-    public Usuario(int id_Usuario, String nombre_Usuario, String nombre_paterno, String nombre_materno, boolean registro_asistido, String autorizacion_familiar, boolean lectura_automatica, LocalTime fecha_nacimiento, String username, String contraseña, int DNI, String estado_cuenta, LocalTime fecha_primer_acceso, boolean tutorial_completado) {
+   public Usuario() {
+
+   }
+
+    public Usuario(int id_Usuario, String nombre_Usuario, String nombre_paterno, String nombre_materno, boolean registro_asistido, String autorizacion_familiar, boolean lectura_automatica, LocalDate fecha_nacimiento, String username, String contraseña, int DNI, String estado_cuenta, LocalDate fecha_primer_acceso, boolean tutorial_completado) {
         Id_Usuario = id_Usuario;
         Nombre_Usuario = nombre_Usuario;
         Nombre_paterno = nombre_paterno;
@@ -66,10 +69,6 @@ public class Usuario {
         this.estado_cuenta = estado_cuenta;
         this.fecha_primer_acceso = fecha_primer_acceso;
         this.tutorial_completado = tutorial_completado;
-    }
-
-    public Usuario() {
-
     }
 
     public int getId_Usuario() {
@@ -128,11 +127,11 @@ public class Usuario {
         this.lectura_automatica = lectura_automatica;
     }
 
-    public LocalTime getFecha_nacimiento() {
+    public LocalDate getFecha_nacimiento() {
         return Fecha_nacimiento;
     }
 
-    public void setFecha_nacimiento(LocalTime fecha_nacimiento) {
+    public void setFecha_nacimiento(LocalDate fecha_nacimiento) {
         Fecha_nacimiento = fecha_nacimiento;
     }
 
@@ -168,11 +167,11 @@ public class Usuario {
         this.estado_cuenta = estado_cuenta;
     }
 
-    public LocalTime getFecha_primer_acceso() {
+    public LocalDate getFecha_primer_acceso() {
         return fecha_primer_acceso;
     }
 
-    public void setFecha_primer_acceso(LocalTime fecha_primer_acceso) {
+    public void setFecha_primer_acceso(LocalDate fecha_primer_acceso) {
         this.fecha_primer_acceso = fecha_primer_acceso;
     }
 
