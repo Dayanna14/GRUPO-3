@@ -5,12 +5,12 @@ import com.avance.avancetb.entities.PerfilProfesional;
 import com.avance.avancetb.servicesinterfaces.IPerfilProfesionalService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -26,5 +26,56 @@ public class PerfilProfesionalController {
                 .stream().map(x->m.map(x,PerfilProfesionalDTO.class))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(listaPerfilesProfesionales);
+    }
+    @PostMapping("/nuevo")
+    public ResponseEntity<PerfilProfesionalDTO> registrar(@RequestBody PerfilProfesionalDTO dto){
+        ModelMapper m=new ModelMapper();
+        PerfilProfesional p=m.map(dto,PerfilProfesional.class);
+        PerfilProfesional pP=pSer.insert(p);
+        PerfilProfesionalDTO respondeDTO=m.map(pP,PerfilProfesionalDTO.class);
+        return ResponseEntity.status(HttpStatus.CREATED).body(respondeDTO);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<?> buscarPorId(@PathVariable int id) {
+        ModelMapper m = new ModelMapper();
+        Optional<PerfilProfesional> perfil = pSer.listId(id);
+
+        if (perfil.isPresent()) {
+            PerfilProfesionalDTO dto = m.map(perfil.get(), PerfilProfesionalDTO.class);
+            return ResponseEntity.ok(dto);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Perfil no encontrada");
+        }
+    }
+    @PutMapping("/actualiza")
+    public ResponseEntity<String> actualizar(@RequestBody PerfilProfesionalDTO dto) {
+
+        Optional<PerfilProfesional> existente = pSer.listId(dto.getIdPerfilProfesional());
+        if (existente.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("perfil no encontrado");
+        }
+
+
+        PerfilProfesional pPer = existente.get();
+        pPer.setIdPerfilProfesional(dto.getIdPerfilProfesional());
+        pPer.setEspecialidad(dto.getEspecialidad());
+        pPer.setBiografia(dto.getBiografia());
+        pSer.update(pPer);
+
+        return ResponseEntity.ok("perfil se actualizo correctamente");
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminar(@PathVariable int id) {
+        Optional<PerfilProfesional> perfil = pSer.listId(id);
+
+        if (perfil.isPresent()) {
+            pSer.delete(id);
+            return ResponseEntity.ok("perfil eliminado correctamente");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("perfil no encontrado");
+        }
     }
 }
