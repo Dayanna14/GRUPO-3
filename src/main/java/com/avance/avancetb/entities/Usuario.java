@@ -51,7 +51,11 @@ public class Usuario {
     @Column(name = "tutorial_completado",nullable = false)
     private boolean tutorial_completado;
 
-    public Usuario(int id_Usuario, String nombre_Usuario, String nombre_paterno, String nombre_materno, boolean registro_asistido, String autorizacion_familiar, boolean lectura_automatica, LocalTime fecha_nacimiento, String username, String contraseña, int DNI, String estado_cuenta, LocalTime fecha_primer_acceso, boolean tutorial_completado) {
+    @ManyToOne
+    @JoinColumn(name = "idRol")
+    private Rol rol;
+
+    public Usuario(int id_Usuario, String nombre_Usuario, String nombre_paterno, String nombre_materno, boolean registro_asistido, String autorizacion_familiar, boolean lectura_automatica, LocalTime fecha_nacimiento, String username, String contraseña, int DNI, String estado_cuenta, LocalTime fecha_primer_acceso, boolean tutorial_completado, Rol rol) {
         Id_Usuario = id_Usuario;
         Nombre_Usuario = nombre_Usuario;
         Nombre_paterno = nombre_paterno;
@@ -66,6 +70,7 @@ public class Usuario {
         this.estado_cuenta = estado_cuenta;
         this.fecha_primer_acceso = fecha_primer_acceso;
         this.tutorial_completado = tutorial_completado;
+        this.rol = rol;
     }
 
     public Usuario() {
@@ -182,6 +187,14 @@ public class Usuario {
 
     public void setTutorial_completado(boolean tutorial_completado) {
         this.tutorial_completado = tutorial_completado;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 }
 
