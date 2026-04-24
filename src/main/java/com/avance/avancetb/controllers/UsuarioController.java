@@ -51,7 +51,7 @@ public class UsuarioController {
     @PutMapping("/actualiza")
     public ResponseEntity<String> actualizar(@RequestBody UsuarioDTO dto) {
 
-        Optional<Usuario> existente = uSer.listId(dto.getId_Usuario());
+        Optional<Usuario> existente = uSer.listId(dto.getIdUsuario());
         if (existente.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Usuario no encontrado");
@@ -59,19 +59,19 @@ public class UsuarioController {
 
 
         Usuario us = existente.get();
-        us.setNombre_Usuario(dto.getNombre_Usuario());
-        us.setNombre_paterno(dto.getNombre_paterno());
-        us.setNombre_materno(dto.getNombre_materno());
-        us.setRegistro_asistido(dto.isRegistro_asistido());
-        us.setAutorizacion_familiar(dto.getAutorizacion_familiar());
-        us.setLectura_automatica(dto.isLectura_automatica());
-        us.setFecha_nacimiento(dto.getFecha_nacimiento());
+        us.setNombreUsuario(dto.getNombreUsuario());
+        us.setNombrePaterno(dto.getNombrePaterno());
+        us.setNombreMaterno(dto.getNombreMaterno());
+        us.setRegistroAsistido(dto.isRegistroAsistido());
+        us.setAutorizacionFamiliar(dto.getAutorizacionFamiliar());
+        us.setLecturaAutomatica(dto.isLecturaAutomatica());
+        us.setFechaNacimiento(dto.getFechaNacimiento());
         us.setUsername(dto.getUsername());
-        us.setContraseña(dto.getContraseña());
-        us.setDNI(dto.getDNI());
-        us.setEstado_cuenta(dto.getEstado_cuenta());
-        us.setFecha_primer_acceso(dto.getFecha_primer_acceso());
-        us.setTutorial_completado(dto.isTutorial_completado());
+        us.setContrasena(dto.getContrasena());
+        us.setDni(dto.getDni());
+        us.setEstadoCuenta(dto.getEstadoCuenta());
+        us.setFechaPrimerAcceso(dto.getFechaPrimerAcceso());
+        us.setTutorialCompletado(dto.isTutorialCompletado());
         uSer.update(us);
 
         return ResponseEntity.ok("Usuario actualizado correctamente");
