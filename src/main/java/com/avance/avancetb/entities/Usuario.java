@@ -2,138 +2,135 @@ package com.avance.avancetb.entities;
 
 import jakarta.persistence.*;
 
-import java.time.LocalTime;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "Usuario") // opcional pero recomendado
+@Table(name = "Usuario") 
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id_Usuario;
+    private int idUsuario;
 
-    @Column(name = "Nombre_Usuario",length = 150,nullable = false)
-    private String Nombre_Usuario;
+    @Column(name = "nombreUsuario",length = 150,nullable = false)
+    private String nombreUsuario;
 
-    @Column(name = "Nombre_paterno",length = 150,nullable = false)
-    private String Nombre_paterno;
+    @Column(name = "nombrePaterno",length = 150,nullable = false)
+    private String nombrePaterno;
 
-    @Column(name = "Nombre_materno",length = 150,nullable = false)
-    private String Nombre_materno;
+    @Column(name = "nombreMaterno",length = 150,nullable = false)
+    private String nombreMaterno;
 
-    @Column(name = "registro_asistido",nullable = false)
-    private boolean registro_asistido;
+    @Column(name = "registroAsistido",nullable = false)
+    private boolean registroAsistido;
 
-    @Column(name = "autorizacion_familiar",length = 150,nullable = false)
-    private String autorizacion_familiar;
+    @Column(name = "autorizacionFamiliar",length = 150,nullable = false)
+    private String autorizacionFamiliar;
 
-    @Column(name = "lectura_automatica",nullable = false)
-    private boolean lectura_automatica;
+    @Column(name = "lecturaAutomatica",nullable = false)
+    private boolean lecturaAutomatica;
 
-    @Column(name = "Fecha_nacimiento",nullable = false)
-    private LocalTime Fecha_nacimiento;
+    @Column(name = "fechaNacimiento",nullable = false)
+    private LocalDate fechaNacimiento;
 
     @Column(name = "username",length = 150,nullable = false)
     private String username;
 
-    @Column(name = "contraseña",length = 150,nullable = false)
-    private String contraseña;
+    @Column(name = "contrasena",length = 150,nullable = false)
+    private String contrasena;
 
-    @Column(name = "DNI",nullable = false)
-    private int DNI;
+    @Column(name = "dni",nullable = false)
+    private int dni;
 
-    @Column(name = "estado_cuenta",length = 150,nullable = false)
-    private String estado_cuenta;
+    @Column(name = "estadoCuenta",length = 150,nullable = false)
+    private String estadoCuenta;
 
-    @Column(name = "fecha_primer_acceso",nullable = false)
-    private LocalTime fecha_primer_acceso;
+    @Column(name = "fechaPrimerAcceso",nullable = false)
+    private LocalDate fechaPrimerAcceso;
 
-    @Column(name = "tutorial_completado",nullable = false)
-    private boolean tutorial_completado;
+    @Column(name = "tutorialCompletado",nullable = false)
+    private boolean tutorialCompletado;
 
-    public Usuario(int id_Usuario, String nombre_Usuario, String nombre_paterno, String nombre_materno, boolean registro_asistido, String autorizacion_familiar, boolean lectura_automatica, LocalTime fecha_nacimiento, String username, String contraseña, int DNI, String estado_cuenta, LocalTime fecha_primer_acceso, boolean tutorial_completado) {
-        Id_Usuario = id_Usuario;
-        Nombre_Usuario = nombre_Usuario;
-        Nombre_paterno = nombre_paterno;
-        Nombre_materno = nombre_materno;
-        this.registro_asistido = registro_asistido;
-        this.autorizacion_familiar = autorizacion_familiar;
-        this.lectura_automatica = lectura_automatica;
-        Fecha_nacimiento = fecha_nacimiento;
+   public Usuario() {}
+
+    public Usuario(int idUsuario, String nombreUsuario, String nombrePaterno, String nombreMaterno, boolean registroAsistido, String autorizacionFamiliar, boolean lecturaAutomatica, LocalDate fechaNacimiento, String username, String contrasena, int dni, String estadoCuenta, LocalDate fechaPrimerAcceso, boolean tutorialCompletado) {
+        this.idUsuario = idUsuario;
+        this.nombreUsuario = nombreUsuario;
+        this.nombrePaterno = nombrePaterno;
+        this.nombreMaterno = nombreMaterno;
+        this.registroAsistido = registroAsistido;
+        this.autorizacionFamiliar = autorizacionFamiliar;
+        this.lecturaAutomatica = lecturaAutomatica;
+        this.fechaNacimiento = fechaNacimiento;
         this.username = username;
-        this.contraseña = contraseña;
-        this.DNI = DNI;
-        this.estado_cuenta = estado_cuenta;
-        this.fecha_primer_acceso = fecha_primer_acceso;
-        this.tutorial_completado = tutorial_completado;
+        this.contrasena = contrasena;
+        this.dni = dni;
+        this.estadoCuenta = estadoCuenta;
+        this.fechaPrimerAcceso = fechaPrimerAcceso;
+        this.tutorialCompletado = tutorialCompletado;
     }
 
-    public Usuario() {
-
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public int getId_Usuario() {
-        return Id_Usuario;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public void setId_Usuario(int id_Usuario) {
-        Id_Usuario = id_Usuario;
+    public String getNombreUsuario() {
+        return nombreUsuario;
     }
 
-    public String getNombre_Usuario() {
-        return Nombre_Usuario;
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 
-    public void setNombre_Usuario(String nombre_Usuario) {
-        Nombre_Usuario = nombre_Usuario;
+    public String getNombrePaterno() {
+        return nombrePaterno;
     }
 
-    public String getNombre_paterno() {
-        return Nombre_paterno;
+    public void setNombrePaterno(String nombrePaterno) {
+        this.nombrePaterno = nombrePaterno;
     }
 
-    public void setNombre_paterno(String nombre_paterno) {
-        Nombre_paterno = nombre_paterno;
+    public String getNombreMaterno() {
+        return nombreMaterno;
     }
 
-    public String getNombre_materno() {
-        return Nombre_materno;
+    public void setNombreMaterno(String nombreMaterno) {
+        this.nombreMaterno = nombreMaterno;
     }
 
-    public void setNombre_materno(String nombre_materno) {
-        Nombre_materno = nombre_materno;
+    public boolean isRegistroAsistido() {
+        return registroAsistido;
     }
 
-    public boolean isRegistro_asistido() {
-        return registro_asistido;
+    public void setRegistroAsistido(boolean registroAsistido) {
+        this.registroAsistido = registroAsistido;
     }
 
-    public void setRegistro_asistido(boolean registro_asistido) {
-        this.registro_asistido = registro_asistido;
+    public String getAutorizacionFamiliar() {
+        return autorizacionFamiliar;
     }
 
-    public String getAutorizacion_familiar() {
-        return autorizacion_familiar;
+    public void setAutorizacionFamiliar(String autorizacionFamiliar) {
+        this.autorizacionFamiliar = autorizacionFamiliar;
     }
 
-    public void setAutorizacion_familiar(String autorizacion_familiar) {
-        this.autorizacion_familiar = autorizacion_familiar;
+    public boolean isLecturaAutomatica() {
+        return lecturaAutomatica;
     }
 
-    public boolean isLectura_automatica() {
-        return lectura_automatica;
+    public void setLecturaAutomatica(boolean lecturaAutomatica) {
+        this.lecturaAutomatica = lecturaAutomatica;
     }
 
-    public void setLectura_automatica(boolean lectura_automatica) {
-        this.lectura_automatica = lectura_automatica;
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
-    public LocalTime getFecha_nacimiento() {
-        return Fecha_nacimiento;
-    }
-
-    public void setFecha_nacimiento(LocalTime fecha_nacimiento) {
-        Fecha_nacimiento = fecha_nacimiento;
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public String getUsername() {
@@ -144,44 +141,44 @@ public class Usuario {
         this.username = username;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
-    public int getDNI() {
-        return DNI;
+    public int getDni() {
+        return dni;
     }
 
-    public void setDNI(int DNI) {
-        this.DNI = DNI;
+    public void setDni(int dni) {
+        this.dni = dni;
     }
 
-    public String getEstado_cuenta() {
-        return estado_cuenta;
+    public String getEstadoCuenta() {
+        return estadoCuenta;
     }
 
-    public void setEstado_cuenta(String estado_cuenta) {
-        this.estado_cuenta = estado_cuenta;
+    public void setEstadoCuenta(String estadoCuenta) {
+        this.estadoCuenta = estadoCuenta;
     }
 
-    public LocalTime getFecha_primer_acceso() {
-        return fecha_primer_acceso;
+    public LocalDate getFechaPrimerAcceso() {
+        return fechaPrimerAcceso;
     }
 
-    public void setFecha_primer_acceso(LocalTime fecha_primer_acceso) {
-        this.fecha_primer_acceso = fecha_primer_acceso;
+    public void setFechaPrimerAcceso(LocalDate fechaPrimerAcceso) {
+        this.fechaPrimerAcceso = fechaPrimerAcceso;
     }
 
-    public boolean isTutorial_completado() {
-        return tutorial_completado;
+    public boolean isTutorialCompletado() {
+        return tutorialCompletado;
     }
 
-    public void setTutorial_completado(boolean tutorial_completado) {
-        this.tutorial_completado = tutorial_completado;
+    public void setTutorialCompletado(boolean tutorialCompletado) {
+        this.tutorialCompletado = tutorialCompletado;
     }
 }
 
