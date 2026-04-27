@@ -1,5 +1,6 @@
 package com.avance.avancetb.controllers;
 
+import com.avance.avancetb.dtos.EstadoRolDTO;
 import com.avance.avancetb.dtos.RolDTO;
 import com.avance.avancetb.entities.Rol;
 import com.avance.avancetb.servicesinterfaces.IRolService;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -68,6 +70,7 @@ public class RolController {
 
         return ResponseEntity.ok("Rol actualizado correctamente");
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable int id) {
         Optional<Rol> sala = RR.listId(id);
@@ -79,6 +82,25 @@ public class RolController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Rol no encontrado");
         }
+    }
+
+    @GetMapping("/usuarios-estados")
+    public ResponseEntity<?> buscarUsuariosPorEstado(@RequestParam String estado) {
+        List<Object[]> lista = RR.listarUsuariosPorEstado(estado);
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron usuarios registrados con el estado: " + estado);
+        }
+        List<EstadoRolDTO> respuesta = new ArrayList<>();
+        for (Object[] columna : lista) {
+            EstadoRolDTO dto = new EstadoRolDTO();
+            dto.setNombreRol(columna[0].toString());
+            dto.setDescripcion(columna[1].toString());
+            dto.setUsuario(columna[2].toString());
+            dto.setEstado(columna[3].toString());
+            respuesta.add(dto);
+        }
+        return ResponseEntity.ok(respuesta);
     }
 }
 
