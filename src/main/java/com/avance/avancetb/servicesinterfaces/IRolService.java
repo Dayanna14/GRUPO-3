@@ -1,6 +1,7 @@
 package com.avance.avancetb.servicesinterfaces;
 
 import com.avance.avancetb.entities.Rol;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,4 +12,6 @@ public interface IRolService {
     public void update(Rol r);
     public Optional<Rol> listId(int id);
     public void delete(int id);
+    List<Object[]> listarUsuariosPorEstado(String estado);
+
 }

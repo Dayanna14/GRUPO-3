@@ -1,10 +1,12 @@
 package com.avance.avancetb.controllers;
 
 import com.avance.avancetb.dtos.UsuarioDTO;
+import com.avance.avancetb.entities.Rol;
 import com.avance.avancetb.entities.Usuario;
 import com.avance.avancetb.servicesinterfaces.IUsuarioService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("/usuario")
 public class UsuarioController {
     @Autowired
     private IUsuarioService uSer;
@@ -26,15 +29,23 @@ public class UsuarioController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(listaUsuarios);
     }
-    @PostMapping("/nuevo")
-    public ResponseEntity<UsuarioDTO> registrar(@RequestBody UsuarioDTO dto){
-       ModelMapper m=new ModelMapper();
-       Usuario u=m.map(dto,Usuario.class);
-       Usuario us=uSer.insert(u);
-       UsuarioDTO responseDTO=m.map(us,UsuarioDTO.class);
-       return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
+
+    @PostMapping("/usuario/nuevo")
+    public ResponseEntity<?> registrar(@RequestBody UsuarioDTO dto) {
+        try {
+            ModelMapper m = new ModelMapper();
+            Usuario u = m.map(dto, Usuario.class);
+            Rol r = new Rol();
+            r.setIdRol(dto.getIdRol());
+            u.setRol(r);
+            uSer.insert(u);
+            return ResponseEntity.status(HttpStatus.CREATED).body(dto);
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Error: El idRol (" + dto.getIdRol() + ") no existe en la base de datos.");
+        }
     }
-    @GetMapping("/{id}")
+    @GetMapping("/usuario/{id}")
     public ResponseEntity<?> buscarPorId(@PathVariable int id) {
         ModelMapper m = new ModelMapper();
         Optional<Usuario> usuarios = uSer.listId(id);
@@ -48,35 +59,25 @@ public class UsuarioController {
         }
     }
 
-    @PutMapping("/actualiza")
+    @PutMapping("/usuario/actualiza")
     public ResponseEntity<String> actualizar(@RequestBody UsuarioDTO dto) {
-
+        ModelMapper m = new ModelMapper();
         Optional<Usuario> existente = uSer.listId(dto.getIdUsuario());
         if (existente.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Usuario no encontrado");
+                    .body("Usuario no encontrado con ID: " + dto.getIdUsuario());
         }
 
-
-        Usuario us = existente.get();
-        us.setNombreUsuario(dto.getNombreUsuario());
-        us.setNombrePaterno(dto.getNombrePaterno());
-        us.setNombreMaterno(dto.getNombreMaterno());
-        us.setRegistroAsistido(dto.isRegistroAsistido());
-        us.setAutorizacionFamiliar(dto.getAutorizacionFamiliar());
-        us.setLecturaAutomatica(dto.isLecturaAutomatica());
-        us.setFechaNacimiento(dto.getFechaNacimiento());
-        us.setUsername(dto.getUsername());
-        us.setContrasena(dto.getContrasena());
-        us.setDni(dto.getDni());
-        us.setEstadoCuenta(dto.getEstadoCuenta());
-        us.setFechaPrimerAcceso(dto.getFechaPrimerAcceso());
-        us.setTutorialCompletado(dto.isTutorialCompletado());
+        Usuario us = m.map(dto, Usuario.class);
+        Rol r = new Rol();
+        r.setIdRol(dto.getIdRol());
+        us.setRol(r);
         uSer.update(us);
 
         return ResponseEntity.ok("Usuario actualizado correctamente");
     }
-    @DeleteMapping("/{id}")
+
+    @DeleteMapping("/usuario/{id}")
     public ResponseEntity<String> eliminar(@PathVariable int id) {
         Optional<Usuario> usuarios = uSer.listId(id);
 

@@ -5,19 +5,19 @@ import java.time.LocalDate;
 
 public class UsuarioDTO {
     private int idUsuario;
-    private String nombreUsuario;
-    private String nombrePaterno;
-    private String nombreMaterno;
-    private boolean registroAsistido;
-    private String autorizacionFamiliar;
-    private boolean lecturaAutomatica;
-    private LocalDate fechaNacimiento;
+    private String tokenUnico;
     private String username;
+    private String dni;
+    private String apellidoPaterno;
+    private String apellidoMaterno;
+    private Boolean autorizacionFamiliar;
+    private LocalDate fechaNacimiento;
     private String contrasena;
-    private int dni;
     private String estadoCuenta;
     private LocalDate fechaPrimerAcceso;
     private boolean tutorialCompletado;
+    private String fotoPerfil;
+    private int idRol;
 
     public int getIdUsuario() {
         return idUsuario;
@@ -27,60 +27,12 @@ public class UsuarioDTO {
         this.idUsuario = idUsuario;
     }
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
+    public String getTokenUnico() {
+        return tokenUnico;
     }
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
-    }
-
-    public String getNombrePaterno() {
-        return nombrePaterno;
-    }
-
-    public void setNombrePaterno(String nombrePaterno) {
-        this.nombrePaterno = nombrePaterno;
-    }
-
-    public String getNombreMaterno() {
-        return nombreMaterno;
-    }
-
-    public void setNombreMaterno(String nombreMaterno) {
-        this.nombreMaterno = nombreMaterno;
-    }
-
-    public boolean isRegistroAsistido() {
-        return registroAsistido;
-    }
-
-    public void setRegistroAsistido(boolean registroAsistido) {
-        this.registroAsistido = registroAsistido;
-    }
-
-    public String getAutorizacionFamiliar() {
-        return autorizacionFamiliar;
-    }
-
-    public void setAutorizacionFamiliar(String autorizacionFamiliar) {
-        this.autorizacionFamiliar = autorizacionFamiliar;
-    }
-
-    public boolean isLecturaAutomatica() {
-        return lecturaAutomatica;
-    }
-
-    public void setLecturaAutomatica(boolean lecturaAutomatica) {
-        this.lecturaAutomatica = lecturaAutomatica;
-    }
-
-    public LocalDate getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+    public void setTokenUnico(String tokenUnico) {
+        this.tokenUnico = tokenUnico;
     }
 
     public String getUsername() {
@@ -91,20 +43,52 @@ public class UsuarioDTO {
         this.username = username;
     }
 
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public String getApellidoPaterno() {
+        return apellidoPaterno;
+    }
+
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellidoPaterno = apellidoPaterno;
+    }
+
+    public String getApellidoMaterno() {
+        return apellidoMaterno;
+    }
+
+    public void setApellidoMaterno(String apellidoMaterno) {
+        this.apellidoMaterno = apellidoMaterno;
+    }
+
+    public Boolean getAutorizacionFamiliar() {
+        return autorizacionFamiliar;
+    }
+
+    public void setAutorizacionFamiliar(Boolean autorizacionFamiliar) {
+        this.autorizacionFamiliar = autorizacionFamiliar;
+    }
+
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
     public String getContrasena() {
         return contrasena;
     }
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
-    }
-
-    public int getDni() {
-        return dni;
-    }
-
-    public void setDni(int dni) {
-        this.dni = dni;
     }
 
     public String getEstadoCuenta() {
@@ -129,5 +113,21 @@ public class UsuarioDTO {
 
     public void setTutorialCompletado(boolean tutorialCompletado) {
         this.tutorialCompletado = tutorialCompletado;
+    }
+
+    public String getFotoPerfil() {
+        return fotoPerfil;
+    }
+
+    public void setFotoPerfil(String fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
+    }
+
+    public int getIdRol() {
+        return idRol;
+    }
+
+    public void setIdRol(int idRol) {
+        this.idRol = idRol;
     }
 }

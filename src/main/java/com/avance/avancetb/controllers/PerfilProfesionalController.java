@@ -1,5 +1,6 @@
 package com.avance.avancetb.controllers;
 
+import com.avance.avancetb.dtos.BusquedaPerfilDTO;
 import com.avance.avancetb.dtos.PerfilProfesionalDTO;
 import com.avance.avancetb.entities.PerfilProfesional;
 import com.avance.avancetb.servicesinterfaces.IPerfilProfesionalService;
@@ -76,5 +77,25 @@ public class PerfilProfesionalController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("perfil no encontrado");
         }
+    }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<?> buscarPorEspecialidad(@RequestParam String especialidad) {
+        List<PerfilProfesional> listaPerfiles = pSer.buscarPorEspecialidad(especialidad);
+        if (listaPerfiles.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron perfiles con la especialidad o palabra clave: " + especialidad);
+        }
+        List<BusquedaPerfilDTO> respuesta = listaPerfiles.stream().map(p -> {
+            BusquedaPerfilDTO dto = new BusquedaPerfilDTO();
+            dto.setEspecialidad(p.getEspecialidad());
+            dto.setBiografia(p.getBiografia());
+            if(p.getUsuario() != null) {
+                dto.setDni(p.getUsuario().getDni());
+                dto.setApellidos(p.getUsuario().getApellidoPaterno() + " " + p.getUsuario().getApellidoMaterno());
+            }
+            return dto;
+        }).collect(Collectors.toList());
+        return ResponseEntity.ok(respuesta);
     }
 }
