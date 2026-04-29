@@ -51,25 +51,20 @@ public class PerfilProfesionalController {
     }
     @PutMapping("/actualiza")
     public ResponseEntity<String> actualizar(@RequestBody PerfilProfesionalDTO dto) {
-
         Optional<PerfilProfesional> existente = pSer.listId(dto.getIdPerfilProfesional());
         if (existente.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("perfil no encontrado");
         }
-
-
         PerfilProfesional pPer = existente.get();
         pPer.setEspecialidad(dto.getEspecialidad());
         pPer.setBiografia(dto.getBiografia());
         pSer.update(pPer);
-
         return ResponseEntity.ok("perfil se actualizo correctamente");
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable int id) {
         Optional<PerfilProfesional> perfil = pSer.listId(id);
-
         if (perfil.isPresent()) {
             pSer.delete(id);
             return ResponseEntity.ok("perfil eliminado correctamente");
