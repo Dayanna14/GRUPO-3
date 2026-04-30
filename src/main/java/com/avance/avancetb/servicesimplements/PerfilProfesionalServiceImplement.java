@@ -38,4 +38,9 @@ public class PerfilProfesionalServiceImplement implements IPerfilProfesionalServ
     public void delete(int id) {
         pR.deleteById(id);
     }
+
+    @Override
+    public List<PerfilProfesional> buscarPorEspecialidad(String palabra) {
+        return pR.buscarPorEspecialidad(palabra);
+    }
 }

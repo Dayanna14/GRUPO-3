@@ -4,6 +4,7 @@ public class PerfilProfesionalDTO {
     private int idPerfilProfesional;
     private String especialidad;
     private String biografia;
+    private int idUsuario;
 
     public int getIdPerfilProfesional() {
         return idPerfilProfesional;
@@ -27,5 +28,13 @@ public class PerfilProfesionalDTO {
 
     public void setBiografia(String biografia) {
         this.biografia = biografia;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 }
