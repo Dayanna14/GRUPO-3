@@ -1,6 +1,5 @@
 package com.avance.avancetb.dtos;
 
-import jakarta.persistence.Column;
 
 public class TipoEstadoEmocionalDTO {
     private int idTipoEst;

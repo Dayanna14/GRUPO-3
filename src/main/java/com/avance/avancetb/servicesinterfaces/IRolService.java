@@ -1,7 +1,6 @@
 package com.avance.avancetb.servicesinterfaces;
 
 import com.avance.avancetb.entities.Rol;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
