@@ -28,6 +28,7 @@ public class PerfilProfesionalController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(listaPerfilesProfesionales);
     }
+
     @PostMapping("/nuevo")
     public ResponseEntity<PerfilProfesionalDTO> registrar(@RequestBody PerfilProfesionalDTO dto){
         ModelMapper m=new ModelMapper();
