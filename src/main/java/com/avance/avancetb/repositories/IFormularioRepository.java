@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IFormularioRepository extends JpaRepository<Formulario, Integer> {
 
-
+    
 
 }
