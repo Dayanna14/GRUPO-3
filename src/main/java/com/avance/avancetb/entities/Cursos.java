@@ -1,5 +1,7 @@
 package com.avance.avancetb.entities;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -24,6 +26,9 @@ public class Cursos {
     @ManyToOne
     @JoinColumn(name = "idPerfilProfesional", nullable = false)
     private PerfilProfesional perfilProfesional;
+
+    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UsuarioCurso> usuarioCurso;
 
     public Cursos() {}
 

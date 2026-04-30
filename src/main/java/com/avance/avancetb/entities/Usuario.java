@@ -3,6 +3,7 @@ package com.avance.avancetb.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "Usuario") 
@@ -51,6 +52,9 @@ public class Usuario {
     @JoinColumn(name = "idRol", nullable = false)
     private Rol rol;
 
+    @OneToMany(mappedBy = "usuario")
+    private List<UsuarioCurso> usuarioCurso;
+ 
     public Usuario() {}
 
     public Usuario(int idUsuario, String tokenUnico, String username, String dni, String apellidoPaterno, String apellidoMaterno, Boolean autorizacionFamiliar, LocalDate fechaNacimiento, String contrasena, String estadoCuenta, LocalDate fechaPrimerAcceso, boolean tutorialCompletado, String fotoPerfil, Rol rol) {
