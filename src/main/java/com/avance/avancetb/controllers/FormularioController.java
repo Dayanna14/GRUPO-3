@@ -1,6 +1,7 @@
 package com.avance.avancetb.controllers;
 
 
+import com.avance.avancetb.dtos.FormQuery01;
 import com.avance.avancetb.dtos.FormularioDTO;
 import com.avance.avancetb.dtos.PerfilProfesionalDTO;
 import com.avance.avancetb.entities.Formulario;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -89,6 +91,27 @@ public class FormularioController {
                     .body("no encontrado");
         }
     }
+
+
+    @GetMapping("/query1")
+    public ResponseEntity<?> QueryData(){
+        List<String[]> fila = service.FormData();
+        List<FormQuery01> listDTO = new ArrayList<>();
+
+        if (fila.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron registros");
+        }
+
+        for (String[] columna : fila){
+            FormQuery01 dto = new FormQuery01();
+            dto.setID_Formulario(Integer.parseInt(columna[0]));
+            dto.setCorreo((columna[1]));
+            listDTO.add(dto);
+        }
+        return  ResponseEntity.ok((listDTO));
+    }
+
 }
 
 
