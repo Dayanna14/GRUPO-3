@@ -20,17 +20,29 @@ public class Sesion {
     private String titulo_sesion;
 
 
-    public Sesion(int ID_Sesion, int orden_curso, String descripcion_Sesion, String titulo_sesion) {
+    @ManyToOne
+    @JoinColumn(name = "idCursos", nullable = false)
+    private Cursos cursos;
+
+    public Sesion(int ID_Sesion, int orden_curso, String descripcion_Sesion, String titulo_sesion, Cursos cursos) {
         this.ID_Sesion = ID_Sesion;
         this.orden_curso = orden_curso;
         this.descripcion_Sesion = descripcion_Sesion;
         this.titulo_sesion = titulo_sesion;
+        this.cursos = cursos;
     }
 
     public Sesion() {
 
     }
 
+    public Cursos getCursos() {
+        return cursos;
+    }
+
+    public void setCursos(Cursos cursos) {
+        this.cursos = cursos;
+    }
 
     public int getID_Sesion() {
         return ID_Sesion;
