@@ -15,6 +15,16 @@ public class SesionDTO {
 
     private String titulo_sesion;
 
+    private String idCursos;
+
+
+    public String getIdCursos() {
+        return idCursos;
+    }
+
+    public void setIdCursos(String idCursos) {
+        this.idCursos = idCursos;
+    }
 
     public int getID_Sesion() {
         return ID_Sesion;
