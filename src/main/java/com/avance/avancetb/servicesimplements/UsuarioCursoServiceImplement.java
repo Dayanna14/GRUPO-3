@@ -42,8 +42,6 @@ public class UsuarioCursoServiceImplement implements IUsuarioCursoService {
         return UR.save(newEntity);
     }
 
-
-
     @Override
     public UsuarioCurso Delete( int id) {
         UsuarioCurso ur = this.Listid(id);
