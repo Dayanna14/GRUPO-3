@@ -18,12 +18,17 @@ public class PerfilProfesional {
     @Column(name = "biografia",length = 150,nullable = false)
     private String biografia;
 
+    @OneToOne
+    @JoinColumn(name = "idUsuario", nullable = false) // Ahora es una FK normal
+    private Usuario usuario;
+
     public PerfilProfesional() {}
 
-    public PerfilProfesional(int idPerfilProfesional, String especialidad, String biografia) {
+    public PerfilProfesional(int idPerfilProfesional, String especialidad, String biografia, Usuario usuario) {
         this.idPerfilProfesional = idPerfilProfesional;
         this.especialidad = especialidad;
         this.biografia = biografia;
+        this.usuario = usuario;
     }
 
     public int getIdPerfilProfesional() {
@@ -48,5 +53,13 @@ public class PerfilProfesional {
 
     public void setBiografia(String biografia) {
         this.biografia = biografia;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

@@ -39,4 +39,9 @@ public class RolServiceImplement implements IRolService {
     public void delete(int id) {
         rR.deleteById(id);
     }
+
+    @Override
+    public List<Object[]> listarUsuariosPorEstado(String estado) {
+        return rR.listarUsuariosPorEstado(estado);
+    }
 }

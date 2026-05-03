@@ -11,4 +11,6 @@ public interface IRolService {
     public void update(Rol r);
     public Optional<Rol> listId(int id);
     public void delete(int id);
+    List<Object[]> listarUsuariosPorEstado(String estado);
+
 }
