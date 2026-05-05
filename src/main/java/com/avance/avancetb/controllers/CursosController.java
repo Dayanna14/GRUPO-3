@@ -1,6 +1,7 @@
 package com.avance.avancetb.controllers;
 
 import com.avance.avancetb.dtos.CursosDTO;
+import com.avance.avancetb.dtos.ReporteAgrupadoDTO;
 import com.avance.avancetb.entities.Cursos;
 import com.avance.avancetb.entities.PerfilProfesional;
 import com.avance.avancetb.servicesinterfaces.ICursosService;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -85,5 +87,39 @@ public class CursosController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("curso no encontrado");
         }
+    }
+
+    @GetMapping("/reporte-tipos")
+    public ResponseEntity<?> reporteCursosPorTipo() {
+        List<Object[]> lista = curS.reporteCursosPorTipo();
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No hay cursos registrados para generar el reporte.");
+        }
+        List<ReporteAgrupadoDTO> respuesta = new ArrayList<>();
+        for (Object[] fila : lista) {
+            ReporteAgrupadoDTO dto = new ReporteAgrupadoDTO();
+            dto.setCategoria((String) fila[0]); // El nombre del tipo de curso
+            dto.setCantidad(((Number) fila[1]).intValue()); // El conteo seguro
+            respuesta.add(dto);
+        }
+        return ResponseEntity.ok(respuesta);
+    }
+
+    @GetMapping("/reporte-aporte-especialidad")
+    public ResponseEntity<?> reporteCursosPorEspecialidad() {
+        List<Object[]> lista = curS.reporteCursosPorEspecialidad();
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No hay suficientes datos para generar el reporte de aportes por especialidad.");
+        }
+        List<ReporteAgrupadoDTO> respuesta = new ArrayList<>();
+        for (Object[] fila : lista) {
+            ReporteAgrupadoDTO dto = new ReporteAgrupadoDTO();
+            dto.setCategoria((String) fila[0]); // El nombre de la especialidad
+            dto.setCantidad(((Number) fila[1]).intValue()); // El conteo de cursos
+            respuesta.add(dto);
+        }
+        return ResponseEntity.ok(respuesta);
     }
 }

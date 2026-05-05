@@ -43,4 +43,9 @@ public class PerfilProfesionalServiceImplement implements IPerfilProfesionalServ
     public List<PerfilProfesional> buscarPorEspecialidad(String palabra) {
         return pR.buscarPorEspecialidad(palabra);
     }
+
+    @Override
+    public List<Object[]> reporteEspecialidades() {
+        return pR.reporteEspecialidades();
+    }
 }

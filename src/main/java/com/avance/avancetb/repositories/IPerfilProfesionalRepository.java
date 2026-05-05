@@ -15,4 +15,9 @@ public interface IPerfilProfesionalRepository extends JpaRepository<PerfilProfes
             "WHERE LOWER(p.especialidad) LIKE \n" +
             "LOWER(CONCAT('%', :palabra, '%'))",nativeQuery = true)
     List<PerfilProfesional> buscarPorEspecialidad(@Param("palabra") String palabra);
+
+    @Query(value = "SELECT LOWER(p.especialidad), COUNT(p.id_perfil_profesional) " +
+            "FROM perfil_profesional p " +
+            "GROUP BY LOWER(p.especialidad)", nativeQuery = true)
+    public List<Object[]> reporteEspecialidades();
 }

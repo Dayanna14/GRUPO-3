@@ -2,6 +2,7 @@ package com.avance.avancetb.controllers;
 
 import com.avance.avancetb.dtos.BusquedaPerfilDTO;
 import com.avance.avancetb.dtos.PerfilProfesionalDTO;
+import com.avance.avancetb.dtos.ReporteAgrupadoDTO;
 import com.avance.avancetb.entities.PerfilProfesional;
 import com.avance.avancetb.servicesinterfaces.IPerfilProfesionalService;
 import org.modelmapper.ModelMapper;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -92,6 +94,23 @@ public class PerfilProfesionalController {
             }
             return dto;
         }).collect(Collectors.toList());
+        return ResponseEntity.ok(respuesta);
+    }
+
+    @GetMapping("/reporte-especialidades")
+    public ResponseEntity<?> reporteEspecialidades() {
+        List<Object[]> lista = pSer.reporteEspecialidades();
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No hay perfiles registrados para generar el reporte de especialidades.");
+        }
+        List<ReporteAgrupadoDTO> respuesta = new ArrayList<>();
+        for (Object[] fila : lista) {
+            ReporteAgrupadoDTO dto = new ReporteAgrupadoDTO();
+            dto.setCategoria((String) fila[0]); // El nombre de la especialidad
+            dto.setCantidad(((Number) fila[1]).intValue()); // El conteo de profesionales
+            respuesta.add(dto);
+        }
         return ResponseEntity.ok(respuesta);
     }
 }

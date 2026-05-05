@@ -12,4 +12,5 @@ public interface IPerfilProfesionalService {
     public Optional<PerfilProfesional> listId(int id);
     public void delete(int id);
     List<PerfilProfesional> buscarPorEspecialidad(String palabra);
+    public List<Object[]> reporteEspecialidades();
 }
