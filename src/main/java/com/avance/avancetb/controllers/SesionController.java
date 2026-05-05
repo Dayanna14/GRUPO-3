@@ -2,6 +2,7 @@ package com.avance.avancetb.controllers;
 
 import com.avance.avancetb.dtos.RolDTO;
 import com.avance.avancetb.dtos.SesionDTO;
+import com.avance.avancetb.dtos.SesionInformeCursoDTO;
 import com.avance.avancetb.entities.Rol;
 import com.avance.avancetb.entities.Sesion;
 import com.avance.avancetb.servicesinterfaces.ISesionService;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -86,5 +88,27 @@ public class SesionController {
                     .body("Rol no encontrado");
         }
     }
+
+    @GetMapping("/cursos-incompletos")
+    public ResponseEntity<?> obtenerReporteCursosIncompletos() {
+        List<Object[]> lista = service.obtenerInformeCursosIncompletos();
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron cursos registrados con pocas sesiones.");
+        }
+        List<SesionInformeCursoDTO> respuesta = new ArrayList<>();
+        for (Object[] columna : lista) {
+            SesionInformeCursoDTO dto = new SesionInformeCursoDTO();
+
+            dto.setNombreCurso(columna[0].toString());
+            dto.setTipoCurso(columna[1].toString());
+            dto.setTotalSesiones(((Number) columna[2]).intValue());
+
+            respuesta.add(dto);
+        }
+
+        return ResponseEntity.ok(respuesta);
+    }
+
 
 }
