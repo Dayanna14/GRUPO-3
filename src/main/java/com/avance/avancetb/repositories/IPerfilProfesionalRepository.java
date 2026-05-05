@@ -23,4 +23,8 @@ public interface IPerfilProfesionalRepository extends JpaRepository<PerfilProfes
             "WHERE p.usuario.username LIKE %:filtro% " +
             "OR c.nombreCurso LIKE %:filtro%")
     List<Object[]> buscarPacientesOCursos(@Param("filtro") String filtro);
+    @Query(value = "SELECT LOWER(p.especialidad), COUNT(p.id_perfil_profesional) " +
+            "FROM perfil_profesional p " +
+            "GROUP BY LOWER(p.especialidad)", nativeQuery = true)
+    public List<Object[]> reporteEspecialidades();
 }

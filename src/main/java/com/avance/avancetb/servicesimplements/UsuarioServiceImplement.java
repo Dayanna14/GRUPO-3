@@ -25,9 +25,7 @@ public class UsuarioServiceImplement implements IUsuarioService {
     }
 
     @Override
-    public void update(Usuario u) {
-        repository.save(u);
-    }
+    public void update(Usuario u) { repository.save(u);}
 
     @Override
     public Optional<Usuario> listId(int id) {

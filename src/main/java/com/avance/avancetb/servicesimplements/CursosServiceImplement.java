@@ -38,4 +38,15 @@ public class CursosServiceImplement implements ICursosService {
     public void delete(int id) {
         curR.deleteById(id);
     }
+
+    @Override
+    public List<Object[]> reporteCursosPorTipo() {
+        return curR.reporteCursosPorTipo();
+    }
+
+    @Override
+    public List<Object[]> reporteCursosPorEspecialidad() {
+        return curR.reporteCursosPorEspecialidad();
+    }
 }
+
