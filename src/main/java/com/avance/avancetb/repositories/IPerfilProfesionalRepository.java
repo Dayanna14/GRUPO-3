@@ -15,4 +15,12 @@ public interface IPerfilProfesionalRepository extends JpaRepository<PerfilProfes
             "WHERE LOWER(p.especialidad) LIKE \n" +
             "LOWER(CONCAT('%', :palabra, '%'))",nativeQuery = true)
     List<PerfilProfesional> buscarPorEspecialidad(@Param("palabra") String palabra);
+
+    //HU16
+    @Query("SELECT p.usuario.username, c.nombreCurso, p.especialidad " +
+            "FROM Cursos c " +
+            "JOIN c.perfilProfesional p " +
+            "WHERE p.usuario.username LIKE %:filtro% " +
+            "OR c.nombreCurso LIKE %:filtro%")
+    List<Object[]> buscarPacientesOCursos(@Param("filtro") String filtro);
 }
