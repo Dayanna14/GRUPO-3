@@ -13,4 +13,8 @@ public interface IFormularioService {
     //public void uptade(Formulario formulario);
     public Optional<Formulario> listId(int id);
     public void delete(int id);
+
+    public List<String[]>FormData();
+
+
 }

@@ -39,4 +39,11 @@ public class FormularioServiceImplement implements IFormularioService {
     public void delete(int id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public List<String[]> FormData() {
+        return repository.FormData();
+    }
+
+
 }
