@@ -11,4 +11,7 @@ public interface ICursosService {
     public void update(Cursos c);
     public Optional<Cursos> listId(int id);
     public void delete(int id);
+    public List<Object[]> reporteCursosPorTipo();
+    public List<Object[]> reporteCursosPorEspecialidad();
+
 }
