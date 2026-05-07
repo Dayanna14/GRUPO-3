@@ -1,22 +1,16 @@
 package com.avance.avancetb.dtos;
 
-import jakarta.persistence.Column;
-
 public class SesionDTO {
 
     private int ID_Sesion;
 
-
     private int orden_curso;
 
-
     private String descripcion_Sesion;
-
 
     private String titulo_sesion;
 
     private String idCursos;
-
 
     public String getIdCursos() {
         return idCursos;

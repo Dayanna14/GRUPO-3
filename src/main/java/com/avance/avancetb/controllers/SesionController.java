@@ -1,9 +1,6 @@
 package com.avance.avancetb.controllers;
-
-import com.avance.avancetb.dtos.RolDTO;
 import com.avance.avancetb.dtos.SesionDTO;
 import com.avance.avancetb.dtos.SesionInformeCursoDTO;
-import com.avance.avancetb.entities.Rol;
 import com.avance.avancetb.entities.Sesion;
 import com.avance.avancetb.servicesinterfaces.ISesionService;
 import org.modelmapper.ModelMapper;
