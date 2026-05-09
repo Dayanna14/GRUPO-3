@@ -3,6 +3,7 @@ package com.avance.avancetb.controllers;
 import com.avance.avancetb.dtos.BusquedaPerfilDTO;
 import com.avance.avancetb.dtos.PacienteOCursoDTOQuery;
 import com.avance.avancetb.dtos.PerfilProfesionalDTO;
+import com.avance.avancetb.dtos.ReporteAgrupadoDTO;
 import com.avance.avancetb.entities.PerfilProfesional;
 import com.avance.avancetb.servicesinterfaces.IPerfilProfesionalService;
 import org.modelmapper.ModelMapper;

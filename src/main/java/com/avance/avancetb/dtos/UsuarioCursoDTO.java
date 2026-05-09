@@ -1,5 +1,11 @@
 package com.avance.avancetb.dtos;
 
+import com.avance.avancetb.entities.Cursos;
+import com.avance.avancetb.entities.Usuario;
+import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
 import java.time.LocalDateTime;
 
 public class UsuarioCursoDTO {

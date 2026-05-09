@@ -48,4 +48,7 @@ public class PerfilProfesionalServiceImplement implements IPerfilProfesionalServ
     public List<Object[]> buscarPacientesOCursos(String filtro) {
         return pR.buscarPacientesOCursos(filtro);
     }
+    public List<Object[]> reporteEspecialidades() {
+        return pR.reporteEspecialidades();
+    }
 }

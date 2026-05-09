@@ -4,7 +4,7 @@ import com.avance.avancetb.dtos.ValoracionCursoDTO;
 import com.avance.avancetb.entities.UsuarioCurso;
 import com.avance.avancetb.entities.ValoracionCurso;
 import com.avance.avancetb.repositories.IValoracionCursoRepository;
-import com.avance.avancetb.repositories.UsuarioCursoRepository;
+import com.avance.avancetb.repositories.IUsuarioCursoRepository;
 import com.avance.avancetb.servicesinterfaces.IValoracionCursoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class ValoracionCursoServiceImplement implements IValoracionCursoService 
     private IValoracionCursoRepository VCR;
 
     @Autowired
-    private UsuarioCursoRepository UCR;
+    private IUsuarioCursoRepository UCR;
 
     @Override
     public List<ValoracionCurso> list() {

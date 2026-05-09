@@ -44,4 +44,7 @@ public class FormularioServiceImplement implements IFormularioService {
     public List<Object[]> obtenerReporteActividadUsuarios() {
         return repository.obtenerReporteActividadUsuarios();
     }
+
+
+
 }
