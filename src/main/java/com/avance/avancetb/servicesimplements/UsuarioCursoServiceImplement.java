@@ -6,7 +6,7 @@ import com.avance.avancetb.entities.Usuario;
 import com.avance.avancetb.entities.UsuarioCurso;
 import com.avance.avancetb.repositories.ICursosRepository;
 import com.avance.avancetb.repositories.IUsuarioRepository;
-import com.avance.avancetb.repositories.UsuarioCursoRepository;
+import com.avance.avancetb.repositories.IUsuarioCursoRepository;
 import com.avance.avancetb.servicesinterfaces.IUsuarioCursoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.List;
 public class UsuarioCursoServiceImplement implements IUsuarioCursoService {
 
     @Autowired
-    private UsuarioCursoRepository UR;
+    private IUsuarioCursoRepository UR;
     @Autowired
     private IUsuarioRepository IUR;
     @Autowired

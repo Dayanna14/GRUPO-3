@@ -6,7 +6,7 @@ import com.avance.avancetb.entities.Sesion;
 import com.avance.avancetb.entities.UsuarioCurso;
 import com.avance.avancetb.repositories.IProgresoSesionRepository;
 import com.avance.avancetb.repositories.ISesionRepository;
-import com.avance.avancetb.repositories.UsuarioCursoRepository;
+import com.avance.avancetb.repositories.IUsuarioCursoRepository;
 import com.avance.avancetb.servicesinterfaces.IProgresoSesionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class ProgresoSesionServiceImplement implements IProgresoSesionService {
     private ISesionRepository SR;
 
     @Autowired
-    private UsuarioCursoRepository UCR;
+    private IUsuarioCursoRepository UCR;
 
     @Override
     public List<ProgresoSesion> list() {
