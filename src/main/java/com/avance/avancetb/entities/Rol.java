@@ -11,7 +11,7 @@ public class Rol implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  int id_rol;
+    private  int idRol;
 
     @Column(name = "nameRol",length = 50,nullable = false)
     private String nameRol;
@@ -23,17 +23,17 @@ public class Rol implements Serializable {
     }
 
     public Rol(int idRol, String descriptionRol, String nameRol) {
-        this.id_rol = id_rol;
+        this.idRol = idRol;
         this.descriptionRol = descriptionRol;
         this.nameRol = nameRol;
     }
 
     public int getIdRol() {
-        return id_rol;
+        return idRol;
     }
 
     public void setIdRol(int idRol) {
-        this.id_rol = id_rol;
+        this.idRol = idRol;
     }
 
     public String getNameRol() {
