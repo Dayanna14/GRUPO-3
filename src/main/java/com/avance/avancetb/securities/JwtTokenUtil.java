@@ -8,8 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.spec.SecretKeySpec;
-import java.util.Base64;
 import java.util.Date;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class JwtTokenUtil {
-    private static final long TOKEN_VALIDITY = 5 * 60 * 60 * 1000; // 5 horas
+    private static final long TOKEN_VALIDITY = 5 * 60 * 60 * 1000;
 
     @Value("${jwt.secret}")
     private String secret;
@@ -30,10 +30,7 @@ public class JwtTokenUtil {
         return getClaim(token, Claims::getExpiration);
     }
 
-    public <T> T getClaim(
-            String token,
-            Function<Claims, T> resolver
-    ) {
+    public <T> T getClaim(String token, Function<Claims, T> resolver) {
         return resolver.apply(getAllClaims(token));
     }
 
@@ -46,57 +43,36 @@ public class JwtTokenUtil {
     }
 
     private boolean isExpired(String token) {
-        return getExpirationDate(token)
-                .before(new Date());
+        return getExpirationDate(token).before(new Date());
     }
 
     public String generateToken(UserDetails userDetails) {
-
         Map<String, Object> claims = new HashMap<>();
 
-        claims.put(
-                "roles",
-                userDetails.getAuthorities()
-                        .stream()
-                        .map(auth -> auth.getAuthority())
-                        .collect(Collectors.joining(","))
-        );
+        // Guardamos los roles dentro del token
+        claims.put("roles", userDetails.getAuthorities().stream()
+                .map(auth -> auth.getAuthority())
+                .collect(Collectors.joining(",")));
 
-        return createToken(
-                claims,
-                userDetails.getUsername()
-        );
+        return createToken(claims, userDetails.getUsername());
     }
 
-    private String createToken(
-            Map<String, Object> claims,
-            String username
-    ) {
-
+    private String createToken(Map<String, Object> claims, String username) {
         Date now = new Date();
-        Date expiration =
-                new Date(now.getTime() + TOKEN_VALIDITY);
+        Date expiration = new Date(now.getTime() + TOKEN_VALIDITY);
 
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(username)
                 .setIssuedAt(now)
                 .setExpiration(expiration)
-                .signWith(
-                        new SecretKeySpec(
-                                Base64.getDecoder().decode(secret),
-                                SignatureAlgorithm.HS512.getJcaName()
-                        )
-                )
+                .signWith(new SecretKeySpec(
+                        Base64.getDecoder().decode(secret),
+                        SignatureAlgorithm.HS512.getJcaName()
+                ))
                 .compact();
     }
-
-    public boolean validateToken(
-            String token,
-            UserDetails userDetails
-    ) {
-        return getUsernameFromToken(token)
-                .equals(userDetails.getUsername())
-                && !isExpired(token);
+    public boolean validateToken(String token, UserDetails userDetails) {
+        return getUsernameFromToken(token).equals(userDetails.getUsername()) && !isExpired(token);
     }
 }
