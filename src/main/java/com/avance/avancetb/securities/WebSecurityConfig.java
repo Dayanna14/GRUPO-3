@@ -42,14 +42,17 @@ public class WebSecurityConfig {
 
     @Bean
     public OpenAPI customOpenAPI() {
+        io.swagger.v3.oas.models.servers.Server server = new io.swagger.v3.oas.models.servers.Server();
+        server.setUrl("https://grupo-3-production.up.railway.app");
         return new OpenAPI()
+                .addServersItem(server)
                 .addSecurityItem(new SecurityRequirement().addList("BearerAuth"))
                 .components(new Components().addSecuritySchemes("BearerAuth", new SecurityScheme()
                         .name("BearerAuth")
                         .type(SecurityScheme.Type.HTTP)
                         .scheme("bearer")
                         .bearerFormat("JWT")));
-    }
+    }   
     @Autowired
     @Qualifier("handlerExceptionResolver")
     private HandlerExceptionResolver exceptionResolver;
