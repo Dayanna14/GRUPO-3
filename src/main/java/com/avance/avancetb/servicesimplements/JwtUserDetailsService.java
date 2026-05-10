@@ -1,7 +1,7 @@
 package com.avance.avancetb.servicesimplements;
 
 import com.avance.avancetb.entities.Usuario;
-import com.avance.avancetb.repositories.IUsuarioRepository;
+import com.avance.avancetb.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,22 +16,26 @@ import java.util.List;
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
     @Autowired
-    private IUsuarioRepository repo;
+    private IUserRepository repo;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Usuario user = repo.findOneByUsername(username);
-
         if (user == null) {
-            throw new UsernameNotFoundException(String.format("Usuario no existe: %s", username));
+            throw new UsernameNotFoundException("Usuario no encontrado: " + username);
         }
-
         List<GrantedAuthority> roles = new ArrayList<>();
         roles.add(new SimpleGrantedAuthority(user.getRol().getNameRol()));
-        return new org.springframework.security.core.userdetails.User(
+        boolean isEnabled = user.getEstadoCuenta().equalsIgnoreCase("ACTIVO");
+        UserDetails ud = new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
-                user.getContrasena(),
-                true, // enabled
-                true, true, true,
-                roles);
+                user.getContrasena(), // Usamos tu método getContrasena()
+                isEnabled,
+                true,
+                true,
+                true,
+                roles
+        );
+        return ud;
     }
 }

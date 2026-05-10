@@ -28,7 +28,7 @@ public class JwtAuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<JwtResponseDTO> login(@RequestBody JwtRequestDTO req) throws Exception {
-        authenticate(req.getUsername(), req.getContrasena()); // Cambiado a getContrasena() por tu DTO
+        authenticate(req.getUsername(), req.getContrasena());
         final UserDetails userDetails = userDetailsService.loadUserByUsername(req.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(new JwtResponseDTO(token));
