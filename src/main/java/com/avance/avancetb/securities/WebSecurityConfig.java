@@ -19,7 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
-import io.swagger.v3.oas.models.servers.Server;
+
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -42,8 +42,6 @@ public class WebSecurityConfig {
 
     @Bean
     public OpenAPI customOpenAPI() {
-        Server server = new Server();
-        server.setUrl("https://grupo-3-production.up.railway.app");
         return new OpenAPI()
                 .addSecurityItem(new SecurityRequirement().addList("BearerAuth"))
                 .components(new Components().addSecuritySchemes("BearerAuth", new SecurityScheme()
