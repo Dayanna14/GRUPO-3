@@ -124,20 +124,4 @@ public class PerfilProfesionalController {
     }
 
 
-    @GetMapping("/reporte-especialidades")
-    public ResponseEntity<?> reporteEspecialidades() {
-        List<Object[]> lista = pSer.reporteEspecialidades();
-        if (lista.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No hay perfiles registrados para generar el reporte de especialidades.");
-        }
-        List<ReporteAgrupadoDTO> respuesta = new ArrayList<>();
-        for (Object[] fila : lista) {
-            ReporteAgrupadoDTO dto = new ReporteAgrupadoDTO();
-            dto.setCategoria((String) fila[0]); // El nombre de la especialidad
-            dto.setCantidad(((Number) fila[1]).intValue()); // El conteo de profesionales
-            respuesta.add(dto);
-        }
-        return ResponseEntity.ok(respuesta);
-    }
 }

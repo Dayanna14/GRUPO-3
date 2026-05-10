@@ -1,7 +1,5 @@
 package com.avance.avancetb.dtos;
 
-import jakarta.persistence.Column;
-
 public class FormularioDTO {
 
     private String Id_Formulario;
@@ -16,10 +14,6 @@ public class FormularioDTO {
     public void setId_Formulario(String id_Formulario) {
         Id_Formulario = id_Formulario;
     }
-
-
-
-
 
     public String getMensaje() {
         return mensaje;
