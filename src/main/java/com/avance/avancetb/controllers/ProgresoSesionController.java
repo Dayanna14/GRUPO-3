@@ -21,20 +21,34 @@ public class ProgresoSesionController {
 
     @GetMapping
     public ResponseEntity<List<ProgresoSesionDTO>> listar() {
-        ModelMapper m = new ModelMapper();
         List<ProgresoSesionDTO> lista = service.list()
                 .stream()
-                .map(ps -> m.map(ps, ProgresoSesionDTO.class))
+                .map(ps -> {
+                    ProgresoSesionDTO dto = new ProgresoSesionDTO();
+                    dto.setIdProgresoSesion(ps.getIdProgresoSesion());
+                    dto.setIdSesion(ps.getSesion().getID_Sesion());
+                    dto.setIdUsuarioCurso(ps.getUsuarioCurso().getIdUsuarioCurso());
+                    dto.setProgreso(ps.getProgreso());
+                    dto.setCompleta(ps.isCompleta());
+                    dto.setFechaCompletado(ps.getFechaCompletado());
+                    return dto;
+                })
                 .collect(Collectors.toList());
         return ResponseEntity.ok(lista);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> buscarPorId(@PathVariable int id) {
-        ModelMapper m = new ModelMapper();
         ProgresoSesion ps = service.listId(id);
         if (ps != null) {
-            return ResponseEntity.ok(m.map(ps, ProgresoSesionDTO.class));
+            ProgresoSesionDTO dto = new ProgresoSesionDTO();
+            dto.setIdProgresoSesion(ps.getIdProgresoSesion());
+            dto.setIdSesion(ps.getSesion().getID_Sesion());
+            dto.setIdUsuarioCurso(ps.getUsuarioCurso().getIdUsuarioCurso());
+            dto.setProgreso(ps.getProgreso());
+            dto.setCompleta(ps.isCompleta());
+            dto.setFechaCompletado(ps.getFechaCompletado());
+            return ResponseEntity.ok(dto);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Progreso no encontrado con ID: " + id);
