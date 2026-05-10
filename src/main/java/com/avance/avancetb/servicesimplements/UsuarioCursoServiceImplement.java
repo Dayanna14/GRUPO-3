@@ -66,4 +66,10 @@ public class UsuarioCursoServiceImplement implements IUsuarioCursoService {
 
         return UR.save(ur);
     }
+
+    @Override
+    public List<Object[]> listarCursosPorUsuario(Integer idUsuario) {
+        return UR.listarCursosPorUsuario(idUsuario);
+    }
+
 }

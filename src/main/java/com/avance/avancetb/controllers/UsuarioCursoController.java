@@ -110,4 +110,10 @@ public class UsuarioCursoController {
                     .body("UsuarioCurso no encontrado");
         }
     }
+
+    @GetMapping("/cursos/{idUsuario}")
+    public List<Object[]> listarCursosPorUsuario(@PathVariable Integer idUsuario) {
+        return US.listarCursosPorUsuario(idUsuario);
+    }
+
 }

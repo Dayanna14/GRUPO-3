@@ -11,5 +11,7 @@ public interface IUsuarioCursoService {
     public UsuarioCurso Create (UsuarioCursoDTO us);
     public UsuarioCurso Delete (int id);
     public UsuarioCurso Update (int id, UsuarioCurso uu);
+
+    public List<Object[]> listarCursosPorUsuario(Integer idUsuario);
 }
 
