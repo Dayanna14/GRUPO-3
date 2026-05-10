@@ -1,7 +1,9 @@
 package com.avance.avancetb.controllers;
 
 import com.avance.avancetb.dtos.BusquedaPerfilDTO;
+import com.avance.avancetb.dtos.PacienteOCursoDTOQuery;
 import com.avance.avancetb.dtos.PerfilProfesionalDTO;
+import com.avance.avancetb.dtos.ReporteAgrupadoDTO;
 import com.avance.avancetb.entities.PerfilProfesional;
 import com.avance.avancetb.servicesinterfaces.IPerfilProfesionalService;
 import org.modelmapper.ModelMapper;
@@ -10,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -94,4 +97,31 @@ public class PerfilProfesionalController {
         }).collect(Collectors.toList());
         return ResponseEntity.ok(respuesta);
     }
+
+    @GetMapping("/Query02")
+    public ResponseEntity<?> buscarInformacion(@RequestParam String filtro) {
+
+        List<Object[]> lista = pSer.buscarPacientesOCursos(filtro);
+
+
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron pacientes o cursos que coincidan con: " + filtro);
+        }
+
+        // 3. Mapeo manual al DTO (Estilo Object[])
+        List<PacienteOCursoDTOQuery> respuesta = new ArrayList<>();
+        for (Object[] columna : lista) {
+            PacienteOCursoDTOQuery dto = new PacienteOCursoDTOQuery();
+
+            dto.setNombrePaciente(columna[0].toString());
+            dto.setNombreCurso(columna[1].toString());
+            dto.setEspecialidadRelacionada(columna[2].toString());
+            respuesta.add(dto);
+        }
+
+        return ResponseEntity.ok(respuesta);
+    }
+
+
 }
