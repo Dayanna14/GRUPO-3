@@ -11,4 +11,5 @@ public interface IValoracionCursoService {
     public ValoracionCurso Create(ValoracionCursoDTO vc);
     public ValoracionCurso Delete(int id);
     public ValoracionCurso Update(int id, ValoracionCurso vc);
+    public List<Object[]> listarValoracionesPorCalificacionMinima(Double minCalificacion);
 }

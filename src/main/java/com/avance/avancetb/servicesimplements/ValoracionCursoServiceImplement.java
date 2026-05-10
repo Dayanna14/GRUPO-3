@@ -73,4 +73,9 @@ public class ValoracionCursoServiceImplement implements IValoracionCursoService 
 
         return VCR.save(vcExistente);
     }
+
+    @Override
+    public List<Object[]> listarValoracionesPorCalificacionMinima(Double minCalificacion) {
+        return VCR.listarValoracionesPorCalificacionMinima(minCalificacion);
+    }
 }
