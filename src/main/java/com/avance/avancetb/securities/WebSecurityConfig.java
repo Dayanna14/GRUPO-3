@@ -37,7 +37,7 @@ public class WebSecurityConfig {
 
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
-    
+
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
