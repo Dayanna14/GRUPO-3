@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,9 @@ import java.util.stream.Collectors;
 public class UsuarioController {
     @Autowired
     private IUsuarioService uSer;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping
     public ResponseEntity<List<UsuarioDTO>> listar(){
@@ -38,6 +42,7 @@ public class UsuarioController {
             Rol r = new Rol();
             r.setIdRol(dto.getIdRol());
             u.setRol(r);
+            u.setContrasena(passwordEncoder.encode(u.getContrasena()));
             uSer.insert(u);
             return ResponseEntity.status(HttpStatus.CREATED).body(dto);
         } catch (DataIntegrityViolationException e) {
