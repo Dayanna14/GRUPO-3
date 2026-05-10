@@ -52,7 +52,7 @@ public class WebSecurityConfig {
                         .type(SecurityScheme.Type.HTTP)
                         .scheme("bearer")
                         .bearerFormat("JWT")));
-    }   
+    }
     @Autowired
     @Qualifier("handlerExceptionResolver")
     private HandlerExceptionResolver exceptionResolver;

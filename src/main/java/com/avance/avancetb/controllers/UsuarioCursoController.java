@@ -23,11 +23,17 @@ public class UsuarioCursoController {
     @GetMapping
     public ResponseEntity<List<UsuarioCursoDTO>> listar() {
 
-        ModelMapper m = new ModelMapper();
-
         List<UsuarioCursoDTO> listaUsuarioCurso = US.list()
                 .stream()
-                .map(usuarioCurso -> m.map(usuarioCurso, UsuarioCursoDTO.class))
+                .map(uc -> {
+                    UsuarioCursoDTO dto = new UsuarioCursoDTO();
+                    dto.setIdUsuarioCurso(uc.getIdUsuarioCurso());
+                    dto.setCurso(uc.getCurso().getIdCursos());
+                    dto.setUsuario(uc.getUsuario().getIdUsuario());
+                    dto.setFechaAsignacion(uc.getFechaAsignacion());
+                    dto.setFechaUltimoAccesso(uc.getFechaUltimoAccesso());
+                    return dto;
+                })
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(listaUsuarioCurso);
