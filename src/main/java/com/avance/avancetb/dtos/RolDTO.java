@@ -1,16 +1,16 @@
 package com.avance.avancetb.dtos;
 
 public class RolDTO {
-    private  int idRol;
+    private  int id_rol;
     private String nameRol;
     private String descriptionRol;
 
-    public int getIdRol() {
-        return idRol;
+    public int getId_rol() {
+        return id_rol;
     }
 
-    public void setIdRol(int idRol) {
-        this.idRol = idRol;
+    public void setId_rol(int id_rol) {
+        this.id_rol = id_rol;
     }
 
     public String getNameRol() {
