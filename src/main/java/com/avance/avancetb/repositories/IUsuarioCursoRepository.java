@@ -17,7 +17,7 @@ public interface IUsuarioCursoRepository extends JpaRepository<UsuarioCurso, Int
             "INNER JOIN cursos c ON uc.id_curso = c.id_cursos " +
             "WHERE uc.id_usuario = :idUsuario " +
             "ORDER BY uc.fecha_asignacion DESC", nativeQuery = true)
-    List<Object[]> listarCursosPorUsuario(@Param("idUsuario") Integer idUsuario);
+    List<Object[]> listarCursosPorUsuario(@Param("idUsuario") int idUsuario);
 
 
 }
