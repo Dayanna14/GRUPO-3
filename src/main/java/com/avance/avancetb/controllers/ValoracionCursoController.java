@@ -22,10 +22,17 @@ public class ValoracionCursoController {
 
     @GetMapping
     public ResponseEntity<List<ValoracionCursoDTO>> listar() {
-        ModelMapper m = new ModelMapper();
         List<ValoracionCursoDTO> lista = service.list()
                 .stream()
-                .map(vc -> m.map(vc, ValoracionCursoDTO.class))
+                .map(vc -> {
+                    ValoracionCursoDTO dto = new ValoracionCursoDTO();
+                    dto.setIdValoracion(vc.getIdValoracion());
+                    dto.setIdUsuarioCurso(vc.getUsuarioCurso().getIdUsuarioCurso());
+                    dto.setFechaValoracion(vc.getFechaValoracion());
+                    dto.setCalificacion(vc.getCalificacion());
+                    dto.setComentario(vc.getComentario());
+                    return dto;
+                })
                 .collect(Collectors.toList());
         return ResponseEntity.ok(lista);
     }
@@ -33,10 +40,15 @@ public class ValoracionCursoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> buscarPorId(@PathVariable int id) {
-        ModelMapper m = new ModelMapper();
         ValoracionCurso vc = service.listId(id);
         if (vc != null) {
-            return ResponseEntity.ok(m.map(vc, ValoracionCursoDTO.class));
+            ValoracionCursoDTO dto = new ValoracionCursoDTO();
+            dto.setIdValoracion(vc.getIdValoracion());
+            dto.setIdUsuarioCurso(vc.getUsuarioCurso().getIdUsuarioCurso());
+            dto.setFechaValoracion(vc.getFechaValoracion());
+            dto.setCalificacion(vc.getCalificacion());
+            dto.setComentario(vc.getComentario());
+            return ResponseEntity.ok(dto);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Valoracion no encontrada con ID: " + id);
