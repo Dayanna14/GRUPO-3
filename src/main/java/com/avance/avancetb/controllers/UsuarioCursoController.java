@@ -106,4 +106,10 @@ public class UsuarioCursoController {
                     .body("Registro no encontrado");
         }
     }
+
+    @GetMapping("/cursos/{idUsuario}")
+    public List<Object[]> listarCursosPorUsuario(@PathVariable Integer idUsuario) {
+        return US.listarCursosPorUsuario(idUsuario);
+    }
+
 }

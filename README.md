@@ -1,2 +1,8 @@
 # GRUPO-3
-#Stephano Fabian Rojas Huaman
+#Ambicho Perez, Dayana
+#Falla Moscol, Luis Alberto
+#Montenegro Alzamora, Jostein Sebastian 
+#Rojas Huaman, Stephano Fabian 
+#Samanamud Prudencio, Enzo
+
+

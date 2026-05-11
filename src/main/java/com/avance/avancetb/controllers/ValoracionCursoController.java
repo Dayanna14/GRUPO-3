@@ -99,4 +99,9 @@ public class ValoracionCursoController {
                     .body("Valoración no encontrada");
         }
     }
+
+    @GetMapping("/valoraciones/min/{minCalificacion}")
+    public List<Object[]> listarValoracionesPorCalificacionMinima(@PathVariable Double minCalificacion) {
+        return service.listarValoracionesPorCalificacionMinima(minCalificacion);
+    }
 }

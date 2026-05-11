@@ -43,4 +43,9 @@ public class ValoracionCursoServiceImplement implements IValoracionCursoService 
     public void delete(int id) {
         VCR.deleteById(id);
     }
+
+    @Override
+    public List<Object[]> listarValoracionesPorCalificacionMinima(Double minCalificacion) {
+        return VCR.listarValoracionesPorCalificacionMinima(minCalificacion);
+    }
 }

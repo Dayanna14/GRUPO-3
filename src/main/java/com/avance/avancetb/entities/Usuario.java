@@ -50,7 +50,7 @@ public class Usuario implements Serializable {
     private String fotoPerfil;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "idRol", nullable = false)
+    @JoinColumn(name = "id_rol", nullable = false)
     private Rol rol;
 
     @OneToMany(mappedBy = "usuario")
