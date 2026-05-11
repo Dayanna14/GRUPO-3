@@ -11,4 +11,5 @@ public interface IValoracionCursoService {
     public Optional<ValoracionCurso> listId(int id);
     public void update(ValoracionCurso v);
     public void delete(int id);
+    List<Object[]> listarUsuariosPorEstado(int minCalificacion);
 }

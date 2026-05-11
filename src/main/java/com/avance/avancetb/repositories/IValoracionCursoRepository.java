@@ -2,7 +2,11 @@ package com.avance.avancetb.repositories;
 
 import com.avance.avancetb.entities.ValoracionCurso;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface IValoracionCursoRepository extends JpaRepository<ValoracionCurso, Integer> {
@@ -14,7 +18,7 @@ public interface IValoracionCursoRepository extends JpaRepository<ValoracionCurs
             "INNER JOIN usuario u ON uc.id_usuario = u.id_usuario " +
             "WHERE vc.calificacion >= :minCalificacion " +
             "ORDER BY vc.calificacion DESC", nativeQuery = true)
-    List<Object[]> listarValoracionesPorCalificacionMinima(@Param("minCalificacion") Double minCalificacion);
+    List<Object[]> listarValoracionesPorCalificacionMinima(@Param("minCalificacion") int minCalificacion);
 
 }
 

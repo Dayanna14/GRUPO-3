@@ -45,7 +45,9 @@ public class ValoracionCursoServiceImplement implements IValoracionCursoService 
     }
 
     @Override
-    public List<Object[]> listarValoracionesPorCalificacionMinima(Double minCalificacion) {
+    public List<Object[]> listarUsuariosPorEstado(int minCalificacion) {
         return VCR.listarValoracionesPorCalificacionMinima(minCalificacion);
     }
+
+
 }

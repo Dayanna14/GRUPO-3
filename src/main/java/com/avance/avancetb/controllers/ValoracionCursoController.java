@@ -24,13 +24,14 @@ public class ValoracionCursoController {
 
     @GetMapping
     public ResponseEntity<List<ValoracionCursoDTO>> listar() {
-<<<<<<< HEAD
-        List<ValoracionCursoDTO> lista = service.list()
+        List<ValoracionCursoDTO> lista = valS.list()
                 .stream()
                 .map(vc -> {
                     ValoracionCursoDTO dto = new ValoracionCursoDTO();
                     dto.setIdValoracion(vc.getIdValoracion());
-                    dto.setIdUsuarioCurso(vc.getUsuarioCurso().getIdUsuarioCurso());
+                    if (vc.getUsuarioCurso() != null) {
+                        dto.setIdUsuarioCurso(vc.getUsuarioCurso().getIdUsuarioCurso());
+                    }
                     dto.setFechaValoracion(vc.getFechaValoracion());
                     dto.setCalificacion(vc.getCalificacion());
                     dto.setComentario(vc.getComentario());
@@ -38,42 +39,21 @@ public class ValoracionCursoController {
                 })
                 .collect(Collectors.toList());
         return ResponseEntity.ok(lista);
-=======
-        ModelMapper m = new ModelMapper();
-        m.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-        List<ValoracionCursoDTO> listaValoraciones = valS.list()
-                .stream().map(x -> {
-                    ValoracionCursoDTO dto = m.map(x, ValoracionCursoDTO.class);
-                    if (x.getUsuarioCurso() != null) {
-                        dto.setIdUsuarioCurso(x.getUsuarioCurso().getIdUsuarioCurso());
-                    }
-                    return dto;
-                }).collect(Collectors.toList());
-        return ResponseEntity.ok(listaValoraciones);
->>>>>>> 908d0241367d909200ad9d5bde00070f455dfdd2
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> buscarPorId(@PathVariable int id) {
-<<<<<<< HEAD
-        ValoracionCurso vc = service.listId(id);
-        if (vc != null) {
+        Optional<ValoracionCurso> valoracion = valS.listId(id);
+        if (valoracion.isPresent()) {
+            ValoracionCurso vc = valoracion.get();
             ValoracionCursoDTO dto = new ValoracionCursoDTO();
             dto.setIdValoracion(vc.getIdValoracion());
-            dto.setIdUsuarioCurso(vc.getUsuarioCurso().getIdUsuarioCurso());
+            if (vc.getUsuarioCurso() != null) {
+                dto.setIdUsuarioCurso(vc.getUsuarioCurso().getIdUsuarioCurso());
+            }
             dto.setFechaValoracion(vc.getFechaValoracion());
             dto.setCalificacion(vc.getCalificacion());
             dto.setComentario(vc.getComentario());
-=======
-        ModelMapper m = new ModelMapper();
-        m.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-        Optional<ValoracionCurso> valoracion = valS.listId(id);
-        if (valoracion.isPresent()) {
-            ValoracionCursoDTO dto = m.map(valoracion.get(), ValoracionCursoDTO.class);
-            if (valoracion.get().getUsuarioCurso() != null) {
-                dto.setIdUsuarioCurso(valoracion.get().getUsuarioCurso().getIdUsuarioCurso());
-            }
->>>>>>> 908d0241367d909200ad9d5bde00070f455dfdd2
             return ResponseEntity.ok(dto);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Valoración no encontrada");
@@ -128,7 +108,7 @@ public class ValoracionCursoController {
     }
 
     @GetMapping("/valoraciones/min/{minCalificacion}")
-    public List<Object[]> listarValoracionesPorCalificacionMinima(@PathVariable Double minCalificacion) {
-        return service.listarValoracionesPorCalificacionMinima(minCalificacion);
+    public List<Object[]> listarValoracionesPorCalificacionMinima(@PathVariable int minCalificacion) {
+        return valS.listarUsuariosPorEstado(minCalificacion);
     }
 }
