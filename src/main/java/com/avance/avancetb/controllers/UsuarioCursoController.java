@@ -109,7 +109,7 @@ public class UsuarioCursoController {
 
     @GetMapping("/cursos/{idUsuario}")
     public List<Object[]> listarCursosPorUsuario(@PathVariable Integer idUsuario) {
-        return US.listarCursosPorUsuario(idUsuario);
+        return ucS.listarCursosPorUsuario(idUsuario);
     }
 
 }
