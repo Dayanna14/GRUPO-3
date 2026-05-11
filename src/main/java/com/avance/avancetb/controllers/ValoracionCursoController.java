@@ -109,6 +109,6 @@ public class ValoracionCursoController {
 
     @GetMapping("/valoraciones/min/{minCalificacion}")
     public List<Object[]> listarValoracionesPorCalificacionMinima(@PathVariable int minCalificacion) {
-        return valS.listarUsuariosPorEstado(minCalificacion);
+        return valS.listarValoracionesPorCalificacionMinima(minCalificacion);
     }
 }
