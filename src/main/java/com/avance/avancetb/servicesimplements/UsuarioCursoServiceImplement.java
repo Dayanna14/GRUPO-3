@@ -47,8 +47,9 @@ public class UsuarioCursoServiceImplement implements IUsuarioCursoService {
     }
 
     @Override
-    public List<Object[]> listarCursosPorUsuario(Integer idUsuario) {
+    public List<Object[]> listarCursosPorUsuario(int idUsuario) {
         return UR.listarCursosPorUsuario(idUsuario);
     }
+
 
 }
