@@ -4,6 +4,7 @@ import com.avance.avancetb.entities.Usuario;
 import com.avance.avancetb.repositories.IUsuarioRepository;
 import com.avance.avancetb.servicesinterfaces.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,9 @@ public class UsuarioServiceImplement implements IUsuarioService {
     @Autowired
         private IUsuarioRepository repository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
         public List<Usuario>list(){
         return repository.findAll();
@@ -21,7 +25,8 @@ public class UsuarioServiceImplement implements IUsuarioService {
 
     @Override
     public Usuario insert(Usuario uU) {
-         return repository.save(uU);
+        uU.setContrasena(passwordEncoder.encode(uU.getContrasena()));
+        return repository.save(uU);
     }
 
     @Override

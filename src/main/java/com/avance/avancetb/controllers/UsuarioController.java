@@ -1,6 +1,7 @@
 package com.avance.avancetb.controllers;
 
 import com.avance.avancetb.dtos.UsuarioDTO;
+import com.avance.avancetb.dtos.UsuarioRegistroDTO;
 import com.avance.avancetb.entities.Rol;
 import com.avance.avancetb.entities.Usuario;
 import com.avance.avancetb.servicesinterfaces.IUsuarioService;
@@ -34,17 +35,23 @@ public class UsuarioController {
         return ResponseEntity.ok(listaUsuarios);
     }
 
-    @PostMapping("/usuario/nuevo")
-    public ResponseEntity<?> registrar(@RequestBody UsuarioDTO dto) {
+    @PostMapping("/nuevo")
+    public ResponseEntity<?> registrar(@RequestBody UsuarioRegistroDTO dto) {
         try {
             ModelMapper m = new ModelMapper();
+
             Usuario u = m.map(dto, Usuario.class);
+
             Rol r = new Rol();
             r.setIdRol(dto.getIdRol());
             u.setRol(r);
-            u.setContrasena(passwordEncoder.encode(u.getContrasena()));
-            uSer.insert(u);
-            return ResponseEntity.status(HttpStatus.CREATED).body(dto);
+
+            Usuario usuarioGuardado = uSer.insert(u);
+
+            UsuarioDTO responseDTO = m.map(usuarioGuardado, UsuarioDTO.class);
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
+
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("Error: El idRol (" + dto.getIdRol() + ") no existe en la base de datos.");

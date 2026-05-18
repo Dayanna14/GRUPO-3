@@ -1,64 +1,27 @@
-package com.avance.avancetb.entities;
+package com.avance.avancetb.dtos;
 
-import jakarta.persistence.*;
-
-import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
-@Entity
-@Table(name = "Usuario") 
-public class Usuario implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UsuarioRegistroDTO {
     private int idUsuario;
-
-    @Column(name = "tokenUnico", length = 255, nullable = false)
     private String tokenUnico;
-
-    @Column(name = "username", length = 150, nullable = false, unique = true)
     private String username;
-
-    @Column(name = "dni", nullable = false)
     private String dni;
-
-    @Column(name = "apellidoPaterno", length = 150, nullable = false)
     private String apellidoPaterno;
-
-    @Column(name = "apellidoMaterno", length = 150, nullable = false)
     private String apellidoMaterno;
-
-    @Column(name = "autorizacionFamiliar")
     private Boolean autorizacionFamiliar;
-
-    @Column(name = "fechaNacimiento", nullable = false)
     private LocalDate fechaNacimiento;
-
-    @Column(name = "contrasena", length = 150, nullable = false)
     private String contrasena;
-
-    @Column(name = "estadoCuenta", length = 150, nullable = false)
     private String estadoCuenta;
-
-    @Column(name = "fechaPrimerAcceso", nullable = false)
+    private Boolean tutorialCompletado;
     private LocalDate fechaPrimerAcceso;
-
-    @Column(name = "tutorialCompletado", nullable = false)
-    private boolean tutorialCompletado;
-
-    @Column(name = "fotoPerfil", length = 255, nullable = false)
     private String fotoPerfil;
+    private int idRol;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_rol", nullable = false)
-    private Rol rol;
+    public UsuarioRegistroDTO() {
+    }
 
-    @OneToMany(mappedBy = "usuario")
-    private List<UsuarioCurso> usuarioCurso;
- 
-    public Usuario() {}
-
-    public Usuario(int idUsuario, String tokenUnico, String username, String dni, String apellidoPaterno, String apellidoMaterno, Boolean autorizacionFamiliar, LocalDate fechaNacimiento, String contrasena, String estadoCuenta, LocalDate fechaPrimerAcceso, boolean tutorialCompletado, String fotoPerfil, Rol rol) {
+    public UsuarioRegistroDTO(int idUsuario, String tokenUnico, String username, String dni, String apellidoPaterno, String apellidoMaterno, Boolean autorizacionFamiliar, LocalDate fechaNacimiento, String contrasena, String estadoCuenta, Boolean tutorialCompletado, LocalDate fechaPrimerAcceso, String fotoPerfil, int idRol) {
         this.idUsuario = idUsuario;
         this.tokenUnico = tokenUnico;
         this.username = username;
@@ -69,10 +32,18 @@ public class Usuario implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
         this.contrasena = contrasena;
         this.estadoCuenta = estadoCuenta;
-        this.fechaPrimerAcceso = fechaPrimerAcceso;
         this.tutorialCompletado = tutorialCompletado;
+        this.fechaPrimerAcceso = fechaPrimerAcceso;
         this.fotoPerfil = fotoPerfil;
-        this.rol = rol;
+        this.idRol = idRol;
+    }
+
+    public LocalDate getFechaPrimerAcceso() {
+        return fechaPrimerAcceso;
+    }
+
+    public void setFechaPrimerAcceso(LocalDate fechaPrimerAcceso) {
+        this.fechaPrimerAcceso = fechaPrimerAcceso;
     }
 
     public int getIdUsuario() {
@@ -155,19 +126,11 @@ public class Usuario implements Serializable {
         this.estadoCuenta = estadoCuenta;
     }
 
-    public LocalDate getFechaPrimerAcceso() {
-        return fechaPrimerAcceso;
-    }
-
-    public void setFechaPrimerAcceso(LocalDate fechaPrimerAcceso) {
-        this.fechaPrimerAcceso = fechaPrimerAcceso;
-    }
-
-    public boolean isTutorialCompletado() {
+    public Boolean getTutorialCompletado() {
         return tutorialCompletado;
     }
 
-    public void setTutorialCompletado(boolean tutorialCompletado) {
+    public void setTutorialCompletado(Boolean tutorialCompletado) {
         this.tutorialCompletado = tutorialCompletado;
     }
 
@@ -179,15 +142,11 @@ public class Usuario implements Serializable {
         this.fotoPerfil = fotoPerfil;
     }
 
-    public Rol getRol() {
-        return rol;
+    public int getIdRol() {
+        return idRol;
     }
 
-    public void setRol(Rol rol) {
-        this.rol = rol;
+    public void setIdRol(int idRol) {
+        this.idRol = idRol;
     }
-
-
 }
-
-
