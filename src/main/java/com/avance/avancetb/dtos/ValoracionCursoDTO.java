@@ -1,33 +1,22 @@
 package com.avance.avancetb.dtos;
 
-import com.avance.avancetb.entities.Cursos;
-import com.avance.avancetb.entities.Usuario;
-import jakarta.persistence.*;
-
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ValoracionCursoDTO {
 
-    private int idValoracionCurso;
-
+    private int idValoracion;
+    private int idUsuarioCurso;
+    private LocalDateTime fechaValoracion;
     private int calificacion;
-
-
     private String comentario;
 
 
-    private LocalDate fechaValoracion;
-
-    private Usuario usuario;
-
-    private Cursos curso;
-
-    public int getIdValoracionCurso() {
-        return idValoracionCurso;
+    public String getComentario() {
+        return comentario;
     }
 
-    public void setIdValoracionCurso(int idValoracionCurso) {
-        this.idValoracionCurso = idValoracionCurso;
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
     }
 
     public int getCalificacion() {
@@ -38,35 +27,27 @@ public class ValoracionCursoDTO {
         this.calificacion = calificacion;
     }
 
-    public String getComentario() {
-        return comentario;
-    }
-
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
-    }
-
-    public LocalDate getFechaValoracion() {
+    public LocalDateTime getFechaValoracion() {
         return fechaValoracion;
     }
 
-    public void setFechaValoracion(LocalDate fechaValoracion) {
+    public void setFechaValoracion(LocalDateTime fechaValoracion) {
         this.fechaValoracion = fechaValoracion;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public int getIdUsuarioCurso() {
+        return idUsuarioCurso;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setIdUsuarioCurso(int idUsuarioCurso) {
+        this.idUsuarioCurso = idUsuarioCurso;
     }
 
-    public Cursos getCurso() {
-        return curso;
+    public int getIdValoracion() {
+        return idValoracion;
     }
 
-    public void setCurso(Cursos curso) {
-        this.curso = curso;
+    public void setIdValoracion(int idValoracion) {
+        this.idValoracion = idValoracion;
     }
 }

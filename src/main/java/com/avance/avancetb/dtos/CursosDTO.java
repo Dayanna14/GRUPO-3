@@ -1,23 +1,12 @@
 package com.avance.avancetb.dtos;
 
-import com.avance.avancetb.entities.PerfilProfesional;
-import jakarta.persistence.*;
-
 public class CursosDTO {
-
     private int idCursos;
-
     private String tipoCurso;
-
     private String nombreCurso;
-
-
     private String descripcion;
-
-
     private String objetivos;
-
-    private PerfilProfesional perfilProfesional;
+    private int idPerfilProfesional;
 
     public int getIdCursos() {
         return idCursos;
@@ -59,11 +48,11 @@ public class CursosDTO {
         this.objetivos = objetivos;
     }
 
-    public PerfilProfesional getPerfilProfesional() {
-        return perfilProfesional;
+    public int getIdPerfilProfesional() {
+        return idPerfilProfesional;
     }
 
-    public void setPerfilProfesional(PerfilProfesional perfilProfesional) {
-        this.perfilProfesional = perfilProfesional;
+    public void setIdPerfilProfesional(int idPerfilProfesional) {
+        this.idPerfilProfesional = idPerfilProfesional;
     }
 }

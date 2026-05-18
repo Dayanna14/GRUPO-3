@@ -1,57 +1,58 @@
 package com.avance.avancetb.dtos;
 
-import com.avance.avancetb.entities.Cursos;
-import jakarta.persistence.*;
-
 public class SesionDTO {
 
-    private int idSesion;
+    private int ID_Sesion;
 
-    private String tituloSesion;
 
-    private String descripcionSesion;
+    private int orden_curso;
 
-    private int ordenSesion;
 
-    private Cursos curso;
+    private String descripcion_Sesion;
 
-    public int getIdSesion() {
-        return idSesion;
+
+    private String titulo_sesion;
+
+    private String idCursos;
+
+
+    public String getIdCursos() {
+        return idCursos;
     }
 
-    public void setIdSesion(int idSesion) {
-        this.idSesion = idSesion;
+    public void setIdCursos(String idCursos) {
+        this.idCursos = idCursos;
     }
 
-    public String getTituloSesion() {
-        return tituloSesion;
+    public int getID_Sesion() {
+        return ID_Sesion;
     }
 
-    public void setTituloSesion(String tituloSesion) {
-        this.tituloSesion = tituloSesion;
+    public void setID_Sesion(int ID_Sesion) {
+        this.ID_Sesion = ID_Sesion;
     }
 
-    public String getDescripcionSesion() {
-        return descripcionSesion;
+    public int getOrden_curso() {
+        return orden_curso;
     }
 
-    public void setDescripcionSesion(String descripcionSesion) {
-        this.descripcionSesion = descripcionSesion;
+    public void setOrden_curso(int orden_curso) {
+        this.orden_curso = orden_curso;
     }
 
-    public int getOrdenSesion() {
-        return ordenSesion;
+    public String getDescripcion_Sesion() {
+        return descripcion_Sesion;
     }
 
-    public void setOrdenSesion(int ordenSesion) {
-        this.ordenSesion = ordenSesion;
+    public void setDescripcion_Sesion(String descripcion_Sesion) {
+        this.descripcion_Sesion = descripcion_Sesion;
     }
 
-    public Cursos getCurso() {
-        return curso;
+    public String getTitulo_sesion() {
+        return titulo_sesion;
     }
 
-    public void setCurso(Cursos curso) {
-        this.curso = curso;
+    public void setTitulo_sesion(String titulo_sesion) {
+        this.titulo_sesion = titulo_sesion;
     }
 }

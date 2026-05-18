@@ -1,23 +1,14 @@
 package com.avance.avancetb.dtos;
 
-import com.avance.avancetb.entities.Usuario;
-import jakarta.persistence.*;
-
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class NotificacionDTO {
-
     private int idNotificacion;
-
-    private String tituloNotificacion;
-
-    private String mensajeNotificacion;
-
-    private LocalDate fechaNotificacion;
-
-    private boolean leida;
-
-    private Usuario usuario;
+    private String mensaje;
+    private LocalDateTime fechaNotificacion;
+    private boolean leido;
+    private boolean activo;
+    private int idUsuario;
 
     public int getIdNotificacion() {
         return idNotificacion;
@@ -27,43 +18,43 @@ public class NotificacionDTO {
         this.idNotificacion = idNotificacion;
     }
 
-    public String getTituloNotificacion() {
-        return tituloNotificacion;
+    public String getMensaje() {
+        return mensaje;
     }
 
-    public void setTituloNotificacion(String tituloNotificacion) {
-        this.tituloNotificacion = tituloNotificacion;
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
     }
 
-    public String getMensajeNotificacion() {
-        return mensajeNotificacion;
-    }
-
-    public void setMensajeNotificacion(String mensajeNotificacion) {
-        this.mensajeNotificacion = mensajeNotificacion;
-    }
-
-    public LocalDate getFechaNotificacion() {
+    public LocalDateTime getFechaNotificacion() {
         return fechaNotificacion;
     }
 
-    public void setFechaNotificacion(LocalDate fechaNotificacion) {
+    public void setFechaNotificacion(LocalDateTime fechaNotificacion) {
         this.fechaNotificacion = fechaNotificacion;
     }
 
-    public boolean isLeida() {
-        return leida;
+    public boolean isLeido() {
+        return leido;
     }
 
-    public void setLeida(boolean leida) {
-        this.leida = leida;
+    public void setLeido(boolean leido) {
+        this.leido = leido;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public boolean isActivo() {
+        return activo;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 }

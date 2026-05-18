@@ -1,29 +1,27 @@
 package com.avance.avancetb.entities;
 
-import com.avance.avancetb.entities.Usuario;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "NotificacionController")
+@Table(name = "Notificacion")
 public class Notificacion {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idNotificacion;
 
-    @Column(name = "tituloNotificacion", length = 100, nullable = false)
-    private String tituloNotificacion;
-
-    @Column(name = "mensajeNotificacion", length = 300, nullable = false)
-    private String mensajeNotificacion;
+    @Column(name = "mensaje", length = 255, nullable = false)
+    private String mensaje;
 
     @Column(name = "fechaNotificacion", nullable = false)
-    private LocalDate fechaNotificacion;
+    private LocalDateTime fechaNotificacion;
 
-    @Column(name = "leida", nullable = false)
-    private boolean leida;
+    @Column(name = "leido", nullable = false)
+    private boolean leido;
+
+    @Column(name = "activo", nullable = false)
+    private boolean activo;
 
     @ManyToOne
     @JoinColumn(name = "idUsuario", nullable = false)
@@ -32,53 +30,13 @@ public class Notificacion {
     public Notificacion() {
     }
 
-    public Notificacion(int idNotificacion, String tituloNotificacion, String mensajeNotificacion, LocalDate fechaNotificacion, boolean leida, Usuario usuario) {
+    public Notificacion(int idNotificacion, String mensaje, LocalDateTime fechaNotificacion, boolean leido, boolean activo, Usuario usuario) {
         this.idNotificacion = idNotificacion;
-        this.tituloNotificacion = tituloNotificacion;
-        this.mensajeNotificacion = mensajeNotificacion;
+        this.mensaje = mensaje;
         this.fechaNotificacion = fechaNotificacion;
-        this.leida = leida;
+        this.leido = leido;
+        this.activo = activo;
         this.usuario = usuario;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public boolean isLeida() {
-        return leida;
-    }
-
-    public void setLeida(boolean leida) {
-        this.leida = leida;
-    }
-
-    public LocalDate getFechaNotificacion() {
-        return fechaNotificacion;
-    }
-
-    public void setFechaNotificacion(LocalDate fechaNotificacion) {
-        this.fechaNotificacion = fechaNotificacion;
-    }
-
-    public String getMensajeNotificacion() {
-        return mensajeNotificacion;
-    }
-
-    public void setMensajeNotificacion(String mensajeNotificacion) {
-        this.mensajeNotificacion = mensajeNotificacion;
-    }
-
-    public String getTituloNotificacion() {
-        return tituloNotificacion;
-    }
-
-    public void setTituloNotificacion(String tituloNotificacion) {
-        this.tituloNotificacion = tituloNotificacion;
     }
 
     public int getIdNotificacion() {
@@ -87,5 +45,45 @@ public class Notificacion {
 
     public void setIdNotificacion(int idNotificacion) {
         this.idNotificacion = idNotificacion;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public LocalDateTime getFechaNotificacion() {
+        return fechaNotificacion;
+    }
+
+    public void setFechaNotificacion(LocalDateTime fechaNotificacion) {
+        this.fechaNotificacion = fechaNotificacion;
+    }
+
+    public boolean isLeido() {
+        return leido;
+    }
+
+    public void setLeido(boolean leido) {
+        this.leido = leido;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

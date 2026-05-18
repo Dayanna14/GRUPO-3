@@ -1,5 +1,6 @@
 package com.avance.avancetb.servicesimplements;
 
+import com.avance.avancetb.entities.Rol;
 import com.avance.avancetb.entities.Sesion;
 import com.avance.avancetb.repositories.ISesionRepository;
 import com.avance.avancetb.servicesinterfaces.ISesionService;
@@ -11,31 +12,38 @@ import java.util.Optional;
 
 @Service
 public class SesionServiceImplement implements ISesionService {
+
     @Autowired
-    private ISesionRepository sR;
+    private ISesionRepository repository;
 
     @Override
     public List<Sesion> list() {
-        return sR.findAll();
+        return repository.findAll();
     }
 
     @Override
-    public Sesion insert(Sesion s) {
-        return sR.save(s);
+    public Sesion insert(Sesion rr) {
+        return repository.save(rr);
     }
 
+
     @Override
-    public void update(Sesion s) {
-        sR.save(s);
+    public void update(Sesion r) {
+        repository.save(r);
     }
 
     @Override
     public Optional<Sesion> listId(int id) {
-        return sR.findById(id);
+        return repository.findById(id);
     }
 
     @Override
     public void delete(int id) {
-        sR.deleteById(id);
+        repository.deleteById(id);
+    }
+
+    @Override
+    public List<Object[]> obtenerInformeCursosIncompletos() {
+        return repository.obtenerInformeCursosIncompletos();
     }
 }

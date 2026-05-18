@@ -1,93 +1,84 @@
 package com.avance.avancetb.entities;
 
-import com.avance.avancetb.entities.Cursos;
-import com.avance.avancetb.entities.Usuario;
-import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
-import java.time.LocalDate;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "ValoracionCurso")
+@Table(name = "Valoracion_Curso")
 public class ValoracionCurso {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idValoracionCurso;
+    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    private int idValoracion;
 
-    @Column(name = "calificacion", nullable = false)
+    @Column(name = "fecha_valoracion")
+    private LocalDateTime fechaValoracion;
+
+    @Column(name = "calificacion")
     private int calificacion;
 
-    @Column(name = "comentario", length = 300, nullable = true)
+    @Column(name = "comentario", columnDefinition = "TEXT")
     private String comentario;
 
-    @Column(name = "fechaValoracion", nullable = false)
-    private LocalDate fechaValoracion;
-
     @ManyToOne
-    @JoinColumn(name = "idUsuario", nullable = false)
-    private Usuario usuario;
-
-    @ManyToOne
-    @JoinColumn(name = "idCurso", nullable = false)
-    private Cursos curso;
+    @JoinColumn(name = "ID_Usuario_Curso", nullable = false)
+    private UsuarioCurso usuarioCurso;
 
     public ValoracionCurso() {
     }
 
-    public ValoracionCurso(int idValoracionCurso, int calificacion, String comentario, LocalDate fechaValoracion, Usuario usuario, Cursos curso) {
-        this.idValoracionCurso = idValoracionCurso;
+    public ValoracionCurso(int idValoracion, UsuarioCurso usuarioCurso, LocalDateTime fechaValoracion, int calificacion, String comentario) {
+        this.idValoracion = idValoracion;
+        this.usuarioCurso = usuarioCurso;
+        this.fechaValoracion = fechaValoracion;
         this.calificacion = calificacion;
         this.comentario = comentario;
-        this.fechaValoracion = fechaValoracion;
-        this.usuario = usuario;
-        this.curso = curso;
     }
 
-    public int getIdValoracionCurso() {
-        return idValoracionCurso;
+    public int getIdValoracion() {
+        return idValoracion;
     }
 
-    public void setIdValoracionCurso(int idValoracionCurso) {
-        this.idValoracionCurso = idValoracionCurso;
+    public UsuarioCurso getUsuarioCurso() {
+        return usuarioCurso;
+    }
+
+    public LocalDateTime getFechaValoracion() {
+        return fechaValoracion;
     }
 
     public int getCalificacion() {
         return calificacion;
     }
 
-    public void setCalificacion(int calificacion) {
-        this.calificacion = calificacion;
-    }
-
     public String getComentario() {
         return comentario;
     }
 
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
+    public void setIdValoracion(int idValoracion) {
+        this.idValoracion = idValoracion;
     }
 
-    public LocalDate getFechaValoracion() {
-        return fechaValoracion;
+    public void setUsuarioCurso(UsuarioCurso usuarioCurso) {
+        this.usuarioCurso = usuarioCurso;
     }
 
-    public void setFechaValoracion(LocalDate fechaValoracion) {
+    public void setFechaValoracion(LocalDateTime fechaValoracion) {
         this.fechaValoracion = fechaValoracion;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public void setCalificacion(int calificacion) {
+        this.calificacion = calificacion;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Cursos getCurso() {
-        return curso;
-    }
-
-    public void setCurso(Cursos curso) {
-        this.curso = curso;
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
     }
 }

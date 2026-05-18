@@ -1,6 +1,5 @@
 package com.avance.avancetb.entities;
 
-import com.avance.avancetb.entities.Cursos;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,69 +8,71 @@ public class Sesion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idSesion;
+    private int ID_Sesion;
 
-    @Column(name = "tituloSesion", length = 100, nullable = false)
-    private String tituloSesion;
+    @Column(name = "orden_curso", nullable = false)
+    private int orden_curso;
 
-    @Column(name = "descripcionSesion", length = 300, nullable = false)
-    private String descripcionSesion;
+    @Column(name = "descripcion_Sesion", nullable = false, length = 250)
+    private String descripcion_Sesion;
 
-    @Column(name = "ordenSesion", nullable = false)
-    private int ordenSesion;
+    @Column(name = "titulo_sesion", nullable = false, length = 250)
+    private String titulo_sesion;
+
 
     @ManyToOne
-    @JoinColumn(name = "idCurso", nullable = false)
-    private Cursos curso;
+    @JoinColumn(name = "idCursos", nullable = false)
+    private Cursos cursos;
+
+    public Sesion(int ID_Sesion, int orden_curso, String descripcion_Sesion, String titulo_sesion, Cursos cursos) {
+        this.ID_Sesion = ID_Sesion;
+        this.orden_curso = orden_curso;
+        this.descripcion_Sesion = descripcion_Sesion;
+        this.titulo_sesion = titulo_sesion;
+        this.cursos = cursos;
+    }
 
     public Sesion() {
+
     }
 
-    public Sesion(int idSesion, String tituloSesion, String descripcionSesion, int ordenSesion, Cursos curso) {
-        this.idSesion = idSesion;
-        this.tituloSesion = tituloSesion;
-        this.descripcionSesion = descripcionSesion;
-        this.ordenSesion = ordenSesion;
-        this.curso = curso;
+    public Cursos getCursos() {
+        return cursos;
     }
 
-    public Cursos getCurso() {
-        return curso;
+    public void setCursos(Cursos cursos) {
+        this.cursos = cursos;
     }
 
-    public void setCurso(Cursos curso) {
-        this.curso = curso;
+    public int getID_Sesion() {
+        return ID_Sesion;
     }
 
-    public int getOrdenSesion() {
-        return ordenSesion;
+    public void setID_Sesion(int ID_Sesion) {
+        this.ID_Sesion = ID_Sesion;
     }
 
-    public void setOrdenSesion(int ordenSesion) {
-        this.ordenSesion = ordenSesion;
+    public int getOrden_curso() {
+        return orden_curso;
     }
 
-    public String getDescripcionSesion() {
-        return descripcionSesion;
+    public void setOrden_curso(int orden_curso) {
+        this.orden_curso = orden_curso;
     }
 
-    public void setDescripcionSesion(String descripcionSesion) {
-        this.descripcionSesion = descripcionSesion;
+    public String getDescripcion_Sesion() {
+        return descripcion_Sesion;
     }
 
-    public String getTituloSesion() {
-        return tituloSesion;
+    public void setDescripcion_Sesion(String descripcion_Sesion) {
+        this.descripcion_Sesion = descripcion_Sesion;
     }
 
-    public void setTituloSesion(String tituloSesion) {
-        this.tituloSesion = tituloSesion;
+    public String getTitulo_sesion() {
+        return titulo_sesion;
     }
 
-    public int getIdSesion() {
-        return idSesion;
-    }
-
-    public void setIdSesion(int idSesion) {
-        this.idSesion = idSesion;
+    public void setTitulo_sesion(String titulo_sesion) {
+        this.titulo_sesion = titulo_sesion;
     }
 }

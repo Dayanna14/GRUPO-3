@@ -25,17 +25,27 @@ public class NotificacionServiceImplement implements INotificacionService {
     }
 
     @Override
-    public void update(Notificacion n) {
-        nR.save(n);
-    }
-
-    @Override
     public Optional<Notificacion> listId(int id) {
         return nR.findById(id);
     }
 
     @Override
+    public void update(Notificacion n) {
+        nR.save(n);
+    }
+
+    @Override
     public void delete(int id) {
         nR.deleteById(id);
+    }
+
+    @Override
+    public List<Notificacion> listarActivasPorUsuario(int idUsuario) {
+        return nR.findByUsuarioIdUsuarioAndLeidoFalseAndActivoTrueOrderByFechaNotificacionDesc(idUsuario);
+    }
+
+    @Override
+    public void marcarComoLeidas(int idUsuario) {
+        nR.marcarTodoComoLeido(idUsuario);
     }
 }
