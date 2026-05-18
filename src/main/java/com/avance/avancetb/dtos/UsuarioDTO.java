@@ -12,7 +12,6 @@ public class UsuarioDTO {
     private String apellidoMaterno;
     private Boolean autorizacionFamiliar;
     private LocalDate fechaNacimiento;
-    private String contrasena;
     private String estadoCuenta;
     private LocalDate fechaPrimerAcceso;
     private boolean tutorialCompletado;
@@ -81,14 +80,6 @@ public class UsuarioDTO {
 
     public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
     }
 
     public String getEstadoCuenta() {
